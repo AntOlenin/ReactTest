@@ -1,17 +1,17 @@
 import React from 'react';
 import { ThemeProvider } from 'react-jss';
-import Text from './components/Text';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import CarListPage from './pages/CarListPage';
+import CarDetailPage from './pages/CarDetailPage';
 import theme from './theme';
 
 const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
-      <div>
-        <Text size="s">text</Text>
-        <Text size="m">text</Text>
-        <Text size="l">text</Text>
-        <Text size="xl">text</Text>
-      </div>
+      <Router>
+        <Route path="/" exact component={CarListPage} />
+        <Route path="/car/:id" component={CarDetailPage} />
+      </Router>
     </ThemeProvider>
   );
 };
