@@ -1,44 +1,109 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Design
 
-## Available Scripts
+[https://github.com/squirreljuror/api-design-and-styles/blob/master/design-and-style-guide.pdf]()
 
-In the project directory, you can run:
+# Task for Frontend Engineer
 
-### `npm start`
+The following document describes the requirements, resources and expectations related
+to the task for the JavaScript Engineer role.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Requirements
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+The application must meet the following requirements:
 
-### `npm test`
+- Fetch all available cars
+- Implement pagination with limit of 10
+- Allow the user to filter the cars by manufacturer or color
+- Allow the user to sort the car by mileage
+- Show the details of a selected car
+- Add/Remove a car to/from the favorites collection using local storage
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Technical requirements
 
-### `npm run build`
+- Create a SPA using **ReactJS**
+- Use redux for application state (optional)
+- Use react-router-dom to manage routing
+- Make tests green
+- Use TypeScript, `any` types are not allowed
+- Use react-testing-library for component tests
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Resources
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+For the UI, please use the design and style guide as a visual guide for your
+application and implement the styles yourself from scratch instead of using a library
+like Bootstrap or Material UI.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+[https://github.com/squirreljuror/api-design-and-styles/blob/master/design-and-style-guide.pdf]()
 
-### `npm run eject`
+For the application data, please use following methods:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+`axios({ url: '/api/cars?page=1&sort=desc&manufacturer=Audi&color=red' })` to fetch cars
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```javascript
+{
+  cars: [{
+    stockNumber: 12345,
+    manufacturerName: 'Audi',
+    modelName: 'A5',
+    color: 'red',
+    mileage: {
+      number: 223;
+      unit: 1;
+    },
+    fuelType: 'Benzin',
+    pictureUrl: '/images/car.svg'
+  }],
+  totalPageCount: 20,
+  totalCarsCount: 100
+}
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+`axios({ url: '/api/cars/1' })` to fetch one car by stockNumber
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```javascript
+{
+  stockNumber: 12345,
+  manufacturerName: 'Audi',
+  modelName: 'A5',
+  color: 'red',
+  mileage: {
+    number: 223;
+    unit: 1;
+  },
+  fuelType: 'Benzin',
+  pictureUrl: '/images/car.svg'
+}
+```
 
-## Learn More
+`axios({ url: '/api/colors' })` to fetch colors
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```javascript
+['red', 'green'];
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+`axios({ url: '/api/manufacturers' })` to fetch manufacturers
+
+```javascript
+{
+  uuid: '123-231',
+  name: 'BMW',
+  models: [{
+    uuid: '234-1222',
+    name: 'A5'
+  }]
+}
+```
+
+Note: Using of `axios` or other xhr based library is mandatory. (fetch api is not supported)
+
+# Our expectations
+
+The most important things for us when evaluating your solution are:
+
+- Make all tests green
+- Use best practices
+- Clear code organization and project structure
+- A well developed UI/UX
+
+Feel free to choose the techniques you feel more comfortable with and
+the most important thing: _Have fun!_
