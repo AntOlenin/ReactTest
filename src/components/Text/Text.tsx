@@ -1,7 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
 import injectSheet from 'react-jss';
-import theme from '../../theme';
 import style from './style';
 
 interface IProps extends ICommonProps {
@@ -9,15 +8,15 @@ interface IProps extends ICommonProps {
   bold?: boolean;
 }
 
-const Text: React.FC<IProps> = ({ children, classes, size = 'm', bold = false }) => {
-  const className = classnames(classes.root, classes[`size-${size}`], {
+const Text: React.FC<IProps> = ({ children, className, classes, size = 'm', bold = false }) => {
+  const rootClassName = classnames(classes.root, className && className, classes[`size-${size}`], {
     [classes.bold]: bold,
   });
 
   return (
-    <div className={className}>
+    <span className={rootClassName}>
       {children}
-    </div>
+    </span>
   );
 };
 

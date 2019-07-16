@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Layout from '../../containers/Layout';
 
 class CarListPage extends React.Component {
   render() {
     return (
-      <div>
+      <Layout>
         CarListPage
-        <Link to={`/car/1`}>hasd</Link>
-      </div>
+        <Link to={`/car/1?t=5`}>hasd</Link><br/>
+        <Link to={`?q=sd`}>q</Link>
+      </Layout>
     )
   }
 }
