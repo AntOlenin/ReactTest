@@ -20,6 +20,7 @@ export default (theme: Theme) => {
     select: {
       width: '100%',
       height: '100%',
+      marginTop: theme.layout.spacing.s,
       borderRadius: theme.ui.select.borderRadius,
       border: `1px solid ${theme.color.border}`,
       background: theme.color.background,

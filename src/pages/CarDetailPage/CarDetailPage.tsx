@@ -13,6 +13,7 @@ class CarDetailPage extends React.Component {
         <br/>
 
         <Select
+          label="label"
           value={'1'}
           options={[
             { value: '1', text: 'bmw' },

@@ -2,6 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import injectSheet from 'react-jss';
 import { Classes } from '../../theme';
+import Text from '../../components/Text';
 import style from './style';
 
 interface Option {
@@ -11,6 +12,7 @@ interface Option {
 
 interface IProps {
   classes: Classes;
+  label: string;
   value: string;
   options: Array<Option>;
   onChange: (option: Option) => void;
@@ -31,15 +33,28 @@ class Select extends React.PureComponent<IProps, IState> {
     });
   };
 
+  renderLabel() {
+    const { label } = this.props;
+
+    return (
+      <label>
+        <Text size="s">{label}</Text>
+      </label>
+    )
+  }
+
   renderSelect() {
     const { classes, options, value } = this.props;
     const { expanded } = this.state;
     const currentOption = options.find(option => option.value === value);
 
-    const seletClassName = classnames(classes.select, expanded && classes.expanded, !expanded && classes.collapsed);
+    const selectClassName = classnames(classes.select, {
+      [classes.expanded]: expanded,
+      [classes.collapsed]: !expanded,
+    });
 
     return (
-      <div className={seletClassName} onClick={this.handleClick}>
+      <div className={selectClassName} onClick={this.handleClick}>
         {currentOption.text}
       </div>
     );
@@ -68,10 +83,13 @@ class Select extends React.PureComponent<IProps, IState> {
     const { classes } = this.props;
 
     return (
-      <div className={classes.root}>
-        {this.renderSelect()}
-        {this.renderOptions()}
-      </div>
+      <>
+        {this.renderLabel()}
+        <div className={classes.root}>
+          {this.renderSelect()}
+          {this.renderOptions()}
+        </div>
+      </>
     )
   }
 }
