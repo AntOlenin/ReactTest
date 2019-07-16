@@ -8,18 +8,22 @@ interface IProps {
   classes: Classes;
 }
 
-const Header: React.FC<IProps> = ({ classes }) => {
-  return (
-    <div className={classes.root}>
-      <div className={classes.logo} style={{ backgroundImage: `url(/images/logo.png)`}} />
+class Header extends React.PureComponent<IProps> {
+  render() {
+    const { classes } = this.props;
 
-      <div className={classes.menu}>
-        <Text className={classes.menuItem}>Purchase</Text>
-        <Text className={classes.menuItem}>My Orders</Text>
-        <Text className={classes.menuItem}>Sell</Text>
+    return (
+      <div className={classes.root}>
+        <div className={classes.logo} style={{ backgroundImage: `url(/images/logo.png)`}} />
+
+        <div className={classes.menu}>
+          <Text className={classes.menuItem}>Purchase</Text>
+          <Text className={classes.menuItem}>My Orders</Text>
+          <Text className={classes.menuItem}>Sell</Text>
+        </div>
       </div>
-    </div>
-  );
-};
+    )
+  }
+}
 
 export default injectSheet(style as any)(Header);

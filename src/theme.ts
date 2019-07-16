@@ -5,6 +5,7 @@ const theme = {
     primary: '#4A4A4A',
     button: '#EA7F28',
     buttonPressed: '#D37324',
+    buttonText: '#EDEDED',
   },
   font: {
     size: {
@@ -34,6 +35,7 @@ const theme = {
     button: {
       width: 128,
       height: 32,
+      borderRadius: 2,
     }
   }
 };
