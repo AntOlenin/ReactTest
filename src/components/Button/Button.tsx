@@ -5,16 +5,17 @@ import style from './style';
 
 interface IProps {
   classes: Classes;
+  text: string;
   onClick: () => void;
 }
 
 class Button extends React.PureComponent<IProps> {
   render() {
-    const { classes, onClick } = this.props;
+    const { classes, text, onClick } = this.props;
 
     return (
       <button className={classes.root} onClick={onClick}>
-        hello
+        {text}
       </button>
     )
   }

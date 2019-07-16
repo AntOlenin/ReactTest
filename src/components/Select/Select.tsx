@@ -1,7 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
 import injectSheet from 'react-jss';
-import { Classes } from '../../theme';
 import Text from '../../components/Text';
 import style from './style';
 
@@ -10,8 +9,7 @@ interface Option {
   text: string;
 }
 
-interface IProps {
-  classes: Classes;
+interface IProps extends ICommonProps {
   label: string;
   value: string;
   options: Array<Option>;
@@ -80,16 +78,18 @@ class Select extends React.PureComponent<IProps, IState> {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, className } = this.props;
+    const rootClassName = classnames(classes.root, className && className);
 
     return (
-      <>
+      <div className={rootClassName}>
         {this.renderLabel()}
-        <div className={classes.root}>
+
+        <div className={classes.selectWrapper}>
           {this.renderSelect()}
           {this.renderOptions()}
         </div>
-      </>
+      </div>
     )
   }
 }

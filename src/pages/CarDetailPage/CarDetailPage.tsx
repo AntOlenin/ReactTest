@@ -1,17 +1,11 @@
 import React from 'react';
 import Layout from '../../containers/Layout';
-import Button from '../../components/Button';
 import Select from '../../components/Select';
 
 class CarDetailPage extends React.Component {
   render() {
     return (
       <Layout>
-        <Button onClick={() => {debugger}}/>
-
-        <br/>
-        <br/>
-
         <Select
           label="label"
           value={'1'}

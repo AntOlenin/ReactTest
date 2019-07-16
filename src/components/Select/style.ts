@@ -13,6 +13,9 @@ export default (theme: Theme) => {
 
   return {
     root: {
+
+    },
+    selectWrapper: {
       width: theme.ui.select.width,
       height: theme.ui.select.height,
       position: 'relative',
@@ -54,6 +57,7 @@ export default (theme: Theme) => {
       borderRadius: theme.ui.select.borderRadius,
       border: `1px solid ${theme.color.border}`,
       boxSizing: 'border-box',
+      zIndex: theme.zIndexes.overlay,
     },
     option: {
       width: '100%',

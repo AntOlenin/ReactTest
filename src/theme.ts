@@ -43,6 +43,9 @@ const theme = {
       height: 32,
       borderRadius: 2,
     }
+  },
+  zIndexes: {
+    overlay: 100,
   }
 };
 
