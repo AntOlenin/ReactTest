@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import CarListPage from './pages/CarListPage';
 import CarDetailPage from './pages/CarDetailPage';
 import theme from './theme';
+import './server';
 
 const App: React.FC = () => {
   return (

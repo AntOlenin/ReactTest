@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import injectSheet from 'react-jss';
 import { Classes } from '../../theme';
 import Select from '../../components/Select';
@@ -10,6 +11,13 @@ interface IProps {
 }
 
 class Filter extends React.PureComponent<IProps> {
+  async componentDidMount() {
+    const colors = await axios({ url: '/api/colors' });
+    const manufacturers = await axios({ url: '/api/manufacturers' });
+    const cars = await axios({ url: '/api/cars' });
+    debugger
+  }
+
   handleSubmit = () => {
     debugger
   };
