@@ -6,6 +6,7 @@ const theme = {
     button: '#EA7F28',
     buttonPressed: '#D37324',
     buttonText: '#EDEDED',
+    border: '#EDEDED',
   },
   font: {
     size: {
@@ -34,6 +35,11 @@ const theme = {
   ui: {
     button: {
       width: 128,
+      height: 32,
+      borderRadius: 2,
+    },
+    select: {
+      width: 220,
       height: 32,
       borderRadius: 2,
     }
