@@ -1,5 +1,5 @@
 import nanoid from 'nanoid';
-import { IManufacturer } from '../types';
+import { IManufacturer } from '../../types';
 
 export const manufacturers: Array<IManufacturer> = [
   {

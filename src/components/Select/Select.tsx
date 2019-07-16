@@ -78,7 +78,12 @@ class Select extends React.PureComponent<IProps, IState> {
   }
 
   render() {
-    const { classes, className } = this.props;
+    const { classes, className, options } = this.props;
+
+    if (!options.length) {
+      return null;
+    }
+
     const rootClassName = classnames(classes.root, className && className);
 
     return (
