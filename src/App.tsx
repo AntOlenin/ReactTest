@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThemeProvider } from 'react-jss';
 import { Provider } from 'react-redux'
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import CarListPage from './pages/CarListPage';
 import CarDetailPage from './pages/CarDetailPage';
 import NotFoundPage from './pages/NotFoundPage';
@@ -14,9 +14,11 @@ const App: React.FC = () => {
     <ThemeProvider theme={theme}>
       <Provider store={store}>
         <Router>
-          <Route path="/" exact component={CarListPage} />
-          <Route path="/car/:id" component={CarDetailPage} />
-          <Route component={NotFoundPage} />
+          <Switch>
+            <Route path="/" exact component={CarListPage} />
+            <Route path="/cars/:id" component={CarDetailPage} />
+            <Route component={NotFoundPage} />
+          </Switch>
         </Router>
       </Provider>
     </ThemeProvider>

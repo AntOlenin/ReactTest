@@ -21,24 +21,25 @@ class CarItem extends React.PureComponent<IProps> {
 
   renderInfo() {
     const { classes, car } = this.props;
-    const { stockNumber, mileage: { number, unit }, fuelType, color, pictureUrl } = car;
+    const { stockNumber, mileage: { number, unit }, fuelType, color } = car;
     const info = `Stock # ${stockNumber} - ${number} ${unit} - ${fuelType} - ${color}`;
 
     return <Text block size="s" className={classes.text}>{info}</Text>;
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, car } = this.props;
+    const { pictureUrl, manufacturerName, stockNumber } = car;
 
     return (
       <div className={classes.root}>
         <div className={classes.picture}>
-          <img src="/images/car.svg" alt=""/>
+          <img src={pictureUrl} alt={true ? '' : manufacturerName}/>
         </div>
         <div className={classes.content}>
           {this.renderTitle()}
           {this.renderInfo()}
-          <Link to="#" className={classes.link}>View details</Link>
+          <Link to={`/cars/${stockNumber}`} className={classes.link}>View details</Link>
         </div>
       </div>
     )
