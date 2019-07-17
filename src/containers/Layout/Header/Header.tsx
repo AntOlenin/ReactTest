@@ -2,6 +2,7 @@ import React from 'react';
 import injectSheet from 'react-jss';
 import { Classes } from '../../../theme';
 import Text from '../../../components/Text';
+import Logo from '../../../components/Logo';
 import style from './style';
 
 interface IProps {
@@ -14,7 +15,7 @@ class Header extends React.PureComponent<IProps> {
 
     return (
       <div className={classes.root}>
-        <div className={classes.logo} style={{ backgroundImage: `url(/images/logo.png)`}} />
+        <Logo />
 
         <div className={classes.menu}>
           <Text className={classes.menuItem}>Purchase</Text>
