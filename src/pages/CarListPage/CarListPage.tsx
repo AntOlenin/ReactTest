@@ -1,4 +1,5 @@
 import React from 'react';
+import qs from 'qs';
 import injectSheet from 'react-jss';
 import Layout from '../../containers/Layout';
 import Filter from '../../containers/Filter';
@@ -6,9 +7,14 @@ import CarList from '../../containers/CarList';
 
 import style from './style';
 
-class CarListPage extends React.Component<ICommonProps> {
+interface IProps extends ICommonProps {
+  location: Location;
+}
+
+class CarListPage extends React.Component<IProps> {
   render() {
-    const { classes } = this.props;
+    const { classes, location } = this.props;
+    const filter = qs.parse(location.search.slice(1));
 
     return (
       <Layout contentClassName={classes.root}>
@@ -16,7 +22,7 @@ class CarListPage extends React.Component<ICommonProps> {
           <Filter />
         </div>
 
-        <CarList />
+        <CarList filter={filter} />
       </Layout>
     )
   }

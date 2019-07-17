@@ -17,7 +17,7 @@ type LoadEntityList = (args: { resource: Resource; filter?: Filter; }) => (dispa
 
 const loadEntityList: LoadEntityList = ({ resource, filter = {} }) => async (dispatch) => {
   const querystring = qs.stringify(filter);
-  const url = `${API_PREFIX}/${resource}/${querystring}`;
+  const url = `${API_PREFIX}/${resource}/?${querystring}`;
   const response = await axios({ url });
 
   const list = response.data[resource];

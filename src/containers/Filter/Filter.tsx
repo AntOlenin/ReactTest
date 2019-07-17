@@ -20,7 +20,6 @@ class Filter extends React.PureComponent<IProps> {
     const { dispatch } = this.props;
     dispatch(actions.loadEntityList({ resource: Resource.colors }));
     dispatch(actions.loadEntityList({ resource: Resource.manufacturers }));
-    dispatch(actions.loadEntityList({ resource: Resource.cars, filter: { page: 1, sort: 'desc', manufacturer: 'Audi', color: 'red' } }));
   }
 
   handleSubmit = () => {
