@@ -18,7 +18,7 @@ const theme = {
 
     weight: {
       regular: 300,
-      bold: 500,
+      bold: 700,
     },
   },
   layout: {

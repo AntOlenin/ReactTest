@@ -24,5 +24,9 @@ export default (theme: Theme) => ({
 
   bold: {
     fontWeight: theme.font.weight.bold,
+  },
+
+  block: {
+    display: 'block',
   }
 });

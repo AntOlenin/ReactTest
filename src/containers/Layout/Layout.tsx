@@ -1,20 +1,24 @@
 import React from 'react';
 import injectSheet from 'react-jss';
+import classnames from 'classnames';
 import Header from './Header';
 import Footer from './Footer';
 import style from './style';
 
-interface IProps extends ICommonProps {}
+interface IProps extends ICommonProps {
+  contentClassName?: string;
+}
 
 class Layout extends React.Component<IProps> {
   render() {
     const { classes, children } = this.props;
+    const contentClassName = classnames(classes.content, this.props.contentClassName);
 
     return (
       <div className={classes.root}>
         <Header />
 
-        <div className={classes.content}>
+        <div className={contentClassName}>
           {children}
         </div>
 
