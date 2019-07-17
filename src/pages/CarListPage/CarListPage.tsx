@@ -4,6 +4,7 @@ import injectSheet from 'react-jss';
 import Layout from '../../containers/Layout';
 import Filter from '../../containers/Filter';
 import CarList from '../../containers/CarList';
+import Pagination from '../../containers/Pagination';
 
 import style from './style';
 
@@ -22,7 +23,13 @@ class CarListPage extends React.Component<IProps> {
           <Filter />
         </div>
 
-        <CarList filter={filter} />
+        <div className={classes.listHolder}>
+          <CarList filter={filter} />
+
+          <div className={classes.paginationHolder}>
+            <Pagination />
+          </div>
+        </div>
       </Layout>
     )
   }

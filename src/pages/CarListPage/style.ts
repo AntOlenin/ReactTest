@@ -6,5 +6,13 @@ export default (theme: Theme) => ({
   },
   filterHolder: {
     marginRight: theme.layout.spacing.l,
+  },
+  listHolder: {
+    width: '100%',
+  },
+  paginationHolder: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: theme.layout.spacing.l,
   }
 });

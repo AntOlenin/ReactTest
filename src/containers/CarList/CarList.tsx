@@ -27,7 +27,7 @@ class CarList extends React.PureComponent<IProps> {
       <div className={classes.root}>
         {cars.map(car => {
           return (
-            <div className={classes.item}>
+            <div key={car.stockNumber} className={classes.item}>
               <CarItem car={car} />
             </div>
           );

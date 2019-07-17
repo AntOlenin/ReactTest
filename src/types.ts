@@ -4,8 +4,13 @@ export interface ReduxStateEntity {
   colors: Array<string>;
 }
 
+export interface ReduxStateMeta {
+  totalPageCount?: number;
+}
+
 export interface ReduxState {
   entity: ReduxStateEntity,
+  meta: ReduxStateMeta,
 }
 
 export enum ActionTypes {

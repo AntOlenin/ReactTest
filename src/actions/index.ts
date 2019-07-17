@@ -21,7 +21,11 @@ const loadEntityList: LoadEntityList = ({ resource, filter = {} }) => async (dis
   const response = await axios({ url });
 
   const list = response.data[resource];
-  return dispatch({ type: ActionTypes.LOAD_ENTITY_LIST_SUCCESS, payload: { resource, list } })
+
+  const totalPageCount = response.data['totalPageCount'];
+  const meta = typeof totalPageCount === 'undefined' ? {} : { totalPageCount };
+
+  dispatch({ type: ActionTypes.LOAD_ENTITY_LIST_SUCCESS, payload: { resource, list, meta } })
 };
 
 export default {
