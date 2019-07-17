@@ -27,7 +27,7 @@ class CarListPage extends React.Component<IProps> {
           <CarList filter={filter} />
 
           <div className={classes.paginationHolder}>
-            <Pagination />
+            <Pagination filter={filter} />
           </div>
         </div>
       </Layout>

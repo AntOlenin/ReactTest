@@ -20,6 +20,15 @@ class CarList extends React.PureComponent<IProps> {
     dispatch(actions.loadEntityList({ resource: Resource.cars, filter }));
   }
 
+  componentDidUpdate(prevProps: IProps) {
+    if (prevProps.filter === this.props.filter) {
+      return;
+    }
+
+    const { filter, dispatch } = this.props;
+    dispatch(actions.loadEntityList({ resource: Resource.cars, filter }));
+  }
+
   render() {
     const { classes, cars } = this.props;
 

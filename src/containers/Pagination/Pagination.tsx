@@ -1,4 +1,5 @@
 import React from 'react';
+import qs from 'qs';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
@@ -10,21 +11,35 @@ import style from './style';
 
 interface IProps {
   classes: Classes;
+  filter: any;
   totalPageCount?: number;
 }
 
 class Pagination extends React.PureComponent<IProps> {
+
+  getHrefWithUpdatedPage(page: number) {
+    const { filter } = this.props;
+    const updatedFilter = { ...filter, page };
+    const querystring = qs.stringify(updatedFilter);
+    return `${window.location.pathname}?${querystring}`;
+  }
+
   render() {
-    const { classes, totalPageCount } = this.props;
+    const { classes, totalPageCount, filter } = this.props;
     const linkClassName = classnames(classes.link, classes.item);
+    const currentPage = Number(filter.page);
+    const hasPrev = currentPage > 1;
+    const hasNext = currentPage < totalPageCount;
+    const nextPage = currentPage + 1;
+    const prevPage = currentPage - 1;
 
     return (
       <div className={classes.root}>
-        <Link to="#" className={linkClassName}>First</Link>
-        <Link to="#" className={linkClassName}>Previous</Link>
-        <Text size="s" className={classes.item}>Page 2 of {totalPageCount}</Text>
-        <Link to="#" className={linkClassName}>Next</Link>
-        <Link to="#" className={linkClassName}>Last</Link>
+        {hasPrev && <Link to={this.getHrefWithUpdatedPage(1)} className={linkClassName}>First</Link>}
+        {hasPrev && <Link to={this.getHrefWithUpdatedPage(prevPage)} className={linkClassName}>Previous</Link>}
+        <Text size="s" className={classes.item}>Page {currentPage} of {totalPageCount}</Text>
+        {hasNext && <Link to={this.getHrefWithUpdatedPage(nextPage)} className={linkClassName}>Next</Link>}
+        {hasNext && <Link to={this.getHrefWithUpdatedPage(totalPageCount)} className={linkClassName}>Last</Link>}
       </div>
     )
   }
