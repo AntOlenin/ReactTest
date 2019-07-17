@@ -1,28 +1,29 @@
 import axios from 'axios';
+import qs from 'qs';
 import { ActionTypes } from '../types';
+import { Dispatch } from 'redux';
 
-// @ts-ignore
-const loadCarList = () => async (dispatch, getState) => {
-  const cars = await axios({ url: '/api/cars' });
-  dispatch({ type: ActionTypes.LOAD_CARS_SUCCESS, payload: cars })
-};
+const API_PREFIX = '/api';
 
-// @ts-ignore
-const loadColorList = () => async (dispatch, getState) => {
-  const response = await axios({ url: '/api/colors' });
-  const payload = response.data.colors;
-  dispatch({ type: ActionTypes.LOAD_COLORS_SUCCESS, payload })
-};
+export enum Resource {
+  cars = 'cars',
+  colors = 'colors',
+  manufacturers = 'manufacturers',
+}
 
-// @ts-ignore
-const loadManufacturerList = () => async (dispatch, getState) => {
-  const response = await axios({ url: '/api/manufacturers' });
-  const payload = response.data.manufacturers;
-  dispatch({ type: ActionTypes.LOAD_MANUFACTURERS_SUCCESS, payload })
+type Filter = Record<string, string | number>;
+
+type LoadEntityList = (args: { resource: Resource; filter?: Filter; }) => (dispatch: Dispatch) => void
+
+const loadEntityList: LoadEntityList = ({ resource, filter = {} }) => async (dispatch) => {
+  const querystring = qs.stringify(filter);
+  const url = `${API_PREFIX}/${resource}/${querystring}`;
+  const response = await axios({ url });
+
+  const list = response.data[resource];
+  return dispatch({ type: ActionTypes.LOAD_ENTITY_LIST_SUCCESS, payload: { resource, list } })
 };
 
 export default {
-  loadManufacturerList,
-  loadColorList,
-  loadCarList,
+  loadEntityList,
 }

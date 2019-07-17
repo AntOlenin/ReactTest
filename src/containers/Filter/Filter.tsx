@@ -6,7 +6,7 @@ import Select from '../../components/Select';
 import Button from '../../components/Button';
 import style from './style';
 import { IManufacturer, ReduxState } from '../../types';
-import actions from '../../actions';
+import actions, { Resource } from '../../actions';
 
 interface IProps {
   classes: Classes;
@@ -18,8 +18,9 @@ interface IProps {
 class Filter extends React.PureComponent<IProps> {
   async componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(actions.loadColorList());
-    dispatch(actions.loadManufacturerList());
+    dispatch(actions.loadEntityList({ resource: Resource.colors }));
+    dispatch(actions.loadEntityList({ resource: Resource.manufacturers }));
+    dispatch(actions.loadEntityList({ resource: Resource.cars, filter: { page: 1, sort: 'desc', manufacturer: 'Audi', color: 'red' } }));
   }
 
   handleSubmit = () => {
@@ -35,7 +36,6 @@ class Filter extends React.PureComponent<IProps> {
     if (!colorOptions.length || !manufacturerOptions.length) {
       return null;
     }
-    debugger
 
     return (
       <div className={classes.root}>
@@ -65,7 +65,7 @@ class Filter extends React.PureComponent<IProps> {
 }
 
 const mapStateToProps = (state: ReduxState) => {
-  const { colors, manufacturers } = state;
+  const { colors, manufacturers } = state.entity;
   return { colors, manufacturers };
 };
 

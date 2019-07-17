@@ -1,14 +1,16 @@
 export type ICar = any;
 export type IManufacturer = any;
 
-export interface ReduxState {
+export interface ReduxStateEntity {
   cars: Array<ICar>;
   manufacturers: Array<IManufacturer>;
   colors: Array<string>;
 }
 
+export interface ReduxState {
+  entity: ReduxStateEntity,
+}
+
 export enum ActionTypes {
-  LOAD_CARS_SUCCESS,
-  LOAD_COLORS_SUCCESS,
-  LOAD_MANUFACTURERS_SUCCESS,
+  LOAD_ENTITY_LIST_SUCCESS,
 }
