@@ -12,6 +12,7 @@ export interface IReduxStateEntity {
 
 export interface IReduxStateMeta {
   totalPageCount?: number;
+  totalCarsCount?: number;
 }
 
 export enum LocalStorageKeys {

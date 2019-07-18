@@ -11,15 +11,26 @@ type LoadEntity = (args: { resource: Resource; id: string | number; }) => (dispa
 type AddCarToLocalStorage = (args: { id: string | number; }) => void;
 type RemoveCarFromFavorite = (args: { id: string | number; }) => void;
 
+const metaKeysMap: Record<Resource, Array<string>> = {
+  [Resource.colors]: [],
+  [Resource.manufacturers]: [],
+  [Resource.cars]: ['totalPageCount', 'totalCarsCount'],
+};
+
 const loadEntityList: LoadEntityList = ({ resource, filter = {} }) => async (dispatch) => {
   const querystring = qs.stringify(filter);
   const url = `${API_PREFIX}/${resource}/?${querystring}`;
   const response = await axios({ url });
 
   const list = response.data[resource];
+  const metaKeys = metaKeysMap[resource];
 
-  const totalPageCount = response.data['totalPageCount'];
-  const meta = typeof totalPageCount === 'undefined' ? {} : { totalPageCount };
+  const meta = metaKeys.reduce((acc, key) => {
+    return {
+      ...acc,
+      [key]: response.data[key],
+    };
+  }, {});
 
   dispatch({ type: ActionTypes.LOAD_ENTITY_LIST_SUCCESS, payload: { resource, list, meta } })
 };
