@@ -4,7 +4,7 @@ import style from './style';
 
 interface IProps extends ICommonProps {
   text: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 class Button extends React.PureComponent<IProps> {

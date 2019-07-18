@@ -10,9 +10,15 @@ import style from './style';
 
 interface IProps extends ICommonProps {
   location: Location;
+  history: any;
 }
 
 class CarListPage extends React.Component<IProps> {
+  handleFilterChange = (params: any) => {
+    const querystring = qs.stringify(params);
+    this.props.history.push({ search: querystring });
+  };
+
   render() {
     const { classes, location } = this.props;
     const filter = qs.parse(location.search.slice(1));
@@ -20,7 +26,7 @@ class CarListPage extends React.Component<IProps> {
     return (
       <Layout contentClassName={classes.root}>
         <div className={classes.filterHolder}>
-          <Filter />
+          <Filter onChange={this.handleFilterChange}/>
         </div>
 
         <div className={classes.listHolder}>

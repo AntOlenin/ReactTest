@@ -13,24 +13,44 @@ interface IProps {
   dispatch: any;
   colors?: Array<string>;
   manufacturers?: Array<IManufacturer>;
+  onChange: any;
 }
 
-class Filter extends React.PureComponent<IProps> {
+interface IState {
+  color: string;
+  manufacturer: string;
+}
+
+class Filter extends React.PureComponent<IProps, IState> {
+  state: IState = {
+    color: 'red',
+    manufacturer: 'Audi',
+  };
+
   async componentDidMount() {
     const { dispatch } = this.props;
     dispatch(actions.loadEntityList({ resource: Resource.colors }));
     dispatch(actions.loadEntityList({ resource: Resource.manufacturers }));
   }
 
-  handleSubmit = () => {
-    debugger
+  handleFormChange = ({ name, value }: { name: string; value: string; }) => {
+    // @ts-ignore
+    this.setState({ [name]: value })
+  };
+
+  handleSubmit = (e: any) => {
+    e.preventDefault();
+    const { onChange } = this.props;
+    const { color, manufacturer } = this.state;
+    onChange({ color, manufacturer })
   };
 
   render() {
     const { classes, colors, manufacturers } = this.props;
+    const { color, manufacturer } = this.state;
 
     const colorOptions = colors.map(color => ({ value: color, text: color }));
-    const manufacturerOptions = manufacturers.map(({ name, uuid }) => ({ value: uuid, text: name }));
+    const manufacturerOptions = manufacturers.map(({ name }) => ({ value: name, text: name }));
 
     if (!colorOptions.length || !manufacturerOptions.length) {
       return null;
@@ -38,26 +58,29 @@ class Filter extends React.PureComponent<IProps> {
 
     return (
       <div className={classes.root}>
-        <Select
-          label="Color"
-          value={colorOptions[0].value}
-          options={colorOptions}
-          onChange={() => {debugger}}
-        />
-        <Select
-          className={classes.manufacturer}
-          label="Manufacturer"
-          value={manufacturerOptions[0].value}
-          options={manufacturerOptions}
-          onChange={() => {debugger}}
-        />
-
-        <div className={classes.actions}>
-          <Button
-            text="Filter"
-            onClick={this.handleSubmit}
+        <form onSubmit={this.handleSubmit}>
+          <Select
+            label="Color"
+            name="color"
+            value={color}
+            options={colorOptions}
+            onChange={this.handleFormChange}
           />
-        </div>
+          <Select
+            label="Manufacturer"
+            name="manufacturer"
+            value={manufacturer}
+            className={classes.manufacturer}
+            options={manufacturerOptions}
+            onChange={this.handleFormChange}
+          />
+
+          <div className={classes.actions}>
+            <Button
+              text="Filter"
+            />
+          </div>
+        </form>
       </div>
     )
   }
@@ -69,4 +92,4 @@ const mapStateToProps = (state: ReduxState) => {
 };
 
 // @ts-ignore
-export default connect(mapStateToProps)(injectSheet(style as any)(Filter));
+export default connect(mapStateToProps)(injectSheet(style)(Filter));

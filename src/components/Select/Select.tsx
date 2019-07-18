@@ -2,18 +2,16 @@ import React from 'react';
 import classnames from 'classnames';
 import injectSheet from 'react-jss';
 import Text from '../../components/Text';
+import Option from './Option';
+import { IOption } from './Option/Option';
 import style from './style';
 
-interface Option {
-  value: string;
-  text: string;
-}
-
 interface IProps extends ICommonProps {
+  name: string;
   label: string;
   value: string;
-  options: Array<Option>;
-  onChange: (option: Option) => void;
+  options: Array<IOption>;
+  onChange: (args: { name: string; value: string; }) => void;
 }
 
 interface IState {
@@ -29,6 +27,12 @@ class Select extends React.PureComponent<IProps, IState> {
     this.setState({
       expanded: !this.state.expanded,
     });
+  };
+
+  handleOptionClick = (value: string) => {
+    const { name, onChange } = this.props;
+    onChange({ name, value });
+    this.setState({ expanded: false });
   };
 
   renderLabel() {
@@ -69,9 +73,7 @@ class Select extends React.PureComponent<IProps, IState> {
     return (
       <div className={classes.options}>
         {options.map((option) => {
-          return (
-            <div key={option.value} className={classes.option}>{option.text}</div>
-          )
+          return <Option key={option.value} option={option} onClick={this.handleOptionClick} />
         })}
       </div>
     );
