@@ -15,6 +15,7 @@ export interface ReduxState {
 
 export enum ActionTypes {
   LOAD_ENTITY_LIST_SUCCESS,
+  LOAD_ENTITY_SUCCESS,
 }
 
 export interface ICar {

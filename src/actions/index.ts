@@ -13,7 +13,8 @@ export enum Resource {
 
 type Filter = Record<string, string | number>;
 
-type LoadEntityList = (args: { resource: Resource; filter?: Filter; }) => (dispatch: Dispatch) => void
+type LoadEntityList = (args: { resource: Resource; filter?: Filter; }) => (dispatch: Dispatch) => void;
+type LoadEntity = (args: { resource: Resource; id: string | number; }) => (dispatch: Dispatch) => void;
 
 const loadEntityList: LoadEntityList = ({ resource, filter = {} }) => async (dispatch) => {
   const querystring = qs.stringify(filter);
@@ -28,6 +29,21 @@ const loadEntityList: LoadEntityList = ({ resource, filter = {} }) => async (dis
   dispatch({ type: ActionTypes.LOAD_ENTITY_LIST_SUCCESS, payload: { resource, list, meta } })
 };
 
+const resourceSingularDataMap = {
+  [Resource.cars]: 'car',
+  [Resource.colors]: 'color',
+  [Resource.manufacturers]: 'manufacturer',
+};
+
+const loadEntity: LoadEntity = ({ resource, id }) => async (dispatch) => {
+  const url = `${API_PREFIX}/${resource}/${id}`;
+  const response = await axios({ url });
+  const data = response.data[resourceSingularDataMap[resource]];
+
+  dispatch({ type: ActionTypes.LOAD_ENTITY_SUCCESS, payload: { resource, data } })
+};
+
 export default {
   loadEntityList,
+  loadEntity,
 }

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Classes } from '../../theme';
 import Text from '../../components/Text';
 import { ICar } from '../../types';
+import { getCarInfo, getCarTitle } from '../../helpers/car';
 import style from './style';
 
 interface IProps {
@@ -13,17 +14,14 @@ interface IProps {
 
 class CarItem extends React.PureComponent<IProps> {
   renderTitle() {
-    const { classes, car: { manufacturerName, modelName } } = this.props;
-    const title = `${manufacturerName} ${modelName}`;
-
+    const { classes, car } = this.props;
+    const title = getCarTitle(car);
     return <Text block bold size="l" className={classes.text}>{title}</Text>;
   }
 
   renderInfo() {
     const { classes, car } = this.props;
-    const { stockNumber, mileage: { number, unit }, fuelType, color } = car;
-    const info = `Stock # ${stockNumber} - ${number} ${unit} - ${fuelType} - ${color}`;
-
+    const info = getCarInfo(car);
     return <Text block size="s" className={classes.text}>{info}</Text>;
   }
 
@@ -34,7 +32,7 @@ class CarItem extends React.PureComponent<IProps> {
     return (
       <div className={classes.root}>
         <div className={classes.picture}>
-          <img src={pictureUrl} alt={true ? '' : manufacturerName}/>
+          <img src={pictureUrl} alt={manufacturerName}/>
         </div>
         <div className={classes.content}>
           {this.renderTitle()}

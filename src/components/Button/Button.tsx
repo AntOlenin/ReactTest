@@ -1,10 +1,8 @@
 import React from 'react';
 import injectSheet from 'react-jss';
-import { Classes } from '../../theme';
 import style from './style';
 
-interface IProps {
-  classes: Classes;
+interface IProps extends ICommonProps {
   text: string;
   onClick: () => void;
 }

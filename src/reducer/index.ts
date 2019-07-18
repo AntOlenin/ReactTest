@@ -12,11 +12,16 @@ const entity = (state: ReduxStateEntity = defaultState, action: any) => {
 
   switch (type) {
     case ActionTypes.LOAD_ENTITY_LIST_SUCCESS:
-      const { resource, list } = payload;
-
       return {
         ...state,
-        [resource]: list
+        [payload.resource]: payload.list
+      };
+    case ActionTypes.LOAD_ENTITY_SUCCESS:
+      return {
+        ...state,
+        [payload.resource]: [
+          payload.data,
+        ]
       };
     default:
       return state
