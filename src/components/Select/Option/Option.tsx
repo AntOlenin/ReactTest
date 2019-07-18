@@ -29,4 +29,4 @@ class Option extends React.PureComponent<IProps> {
   }
 }
 
-export default injectSheet(style as any)(Option);
+export default injectSheet(style)(Option);

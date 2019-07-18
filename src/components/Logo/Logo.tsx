@@ -12,4 +12,4 @@ class Logo extends React.PureComponent<ICommonProps> {
   }
 }
 
-export default injectSheet(style as any)(Logo);
+export default injectSheet(style)(Logo);

@@ -5,7 +5,7 @@ import Layout from '../../containers/Layout';
 import Text from '../../components/Text';
 import Button from '../../components/Button';
 import { getCarInfo, getCarTitle } from '../../helpers/car';
-import { ICar, ReduxState } from '../../types';
+import { ICar, IReduxState } from '../../types';
 import actions, { Resource } from '../../actions';
 import style from './style';
 
@@ -67,11 +67,10 @@ class CarDetailPage extends React.Component<IProps> {
   }
 }
 
-const mapStateToProps = (state: ReduxState, { match }: IProps) => {
+const mapStateToProps = (state: IReduxState, { match }: IProps) => {
   const id = Number(match.params.id);
   const car = state.entity.cars.find(car => car.stockNumber === id);
   return { id, car };
 };
 
-// @ts-ignore
-export default connect(mapStateToProps)(injectSheet(style as any)(CarDetailPage));
+export default connect(mapStateToProps)(injectSheet(style)(CarDetailPage));

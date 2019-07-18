@@ -5,7 +5,7 @@ import { Classes } from '../../theme';
 import Select from '../../components/Select';
 import Button from '../../components/Button';
 import style from './style';
-import { IManufacturer, ReduxState } from '../../types';
+import { IManufacturer, IReduxState, Filter as FilterType } from '../../types';
 import actions, { Resource } from '../../actions';
 
 interface IProps {
@@ -14,6 +14,7 @@ interface IProps {
   colors?: Array<string>;
   manufacturers?: Array<IManufacturer>;
   onChange: any;
+  filter: FilterType;
 }
 
 interface IState {
@@ -23,8 +24,8 @@ interface IState {
 
 class Filter extends React.PureComponent<IProps, IState> {
   state: IState = {
-    color: 'red',
-    manufacturer: 'Audi',
+    color: this.props.filter.color || 'red',
+    manufacturer: this.props.filter.manufacturer || 'Audi',
   };
 
   async componentDidMount() {
@@ -86,10 +87,9 @@ class Filter extends React.PureComponent<IProps, IState> {
   }
 }
 
-const mapStateToProps = (state: ReduxState) => {
+const mapStateToProps = (state: IReduxState) => {
   const { colors, manufacturers } = state.entity;
   return { colors, manufacturers };
 };
 
-// @ts-ignore
 export default connect(mapStateToProps)(injectSheet(style)(Filter));

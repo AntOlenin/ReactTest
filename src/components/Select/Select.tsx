@@ -101,4 +101,4 @@ class Select extends React.PureComponent<IProps, IState> {
   }
 }
 
-export default injectSheet(style as any)(Select);
+export default injectSheet(style)(Select);

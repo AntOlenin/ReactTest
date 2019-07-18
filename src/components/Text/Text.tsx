@@ -22,4 +22,4 @@ const Text: React.FC<IProps> = ({ children, className, classes, size = 'm', bold
   );
 };
 
-export default injectSheet(style as any)(Text);
+export default injectSheet(style)(Text);

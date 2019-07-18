@@ -6,12 +6,12 @@ import injectSheet from 'react-jss';
 import { Link } from 'react-router-dom';
 import Text from '../../components/Text';
 import { Classes } from '../../theme';
-import { ReduxState } from '../../types';
+import { IReduxState, Filter } from '../../types';
 import style from './style';
 
 interface IProps {
   classes: Classes;
-  filter: any;
+  filter: Filter;
   totalPageCount?: number;
 }
 
@@ -45,10 +45,9 @@ class Pagination extends React.PureComponent<IProps> {
   }
 }
 
-const mapStateToProps = (state: ReduxState) => {
+const mapStateToProps = (state: IReduxState) => {
   const { totalPageCount } = state.meta;
   return { totalPageCount };
 };
 
-// @ts-ignore
-export default connect(mapStateToProps)(injectSheet(style as any)(Pagination));
+export default connect(mapStateToProps)(injectSheet(style)(Pagination));

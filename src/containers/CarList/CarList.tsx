@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
 import CarItem from '../../components/CarItem';
 import { Classes } from '../../theme';
-import { ICar, ReduxState } from '../../types';
+import { ICar, IReduxState, Filter } from '../../types';
 import style from './style';
 import actions, { Resource } from '../../actions';
 
 interface IProps {
   classes: Classes;
-  filter: any;
+  filter: Filter;
   dispatch: any;
   cars?: Array<ICar>;
 }
@@ -46,10 +46,9 @@ class CarList extends React.PureComponent<IProps> {
   }
 }
 
-const mapStateToProps = (state: ReduxState) => {
+const mapStateToProps = (state: IReduxState) => {
   const { cars } = state.entity;
   return { cars };
 };
 
-// @ts-ignore
-export default connect(mapStateToProps)(injectSheet(style as any)(CarList));
+export default connect(mapStateToProps)(injectSheet(style)(CarList));

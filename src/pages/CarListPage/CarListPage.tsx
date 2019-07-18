@@ -30,12 +30,12 @@ class CarListPage extends React.Component<IProps> {
     return (
       <Layout contentClassName={classes.root}>
         <div className={classes.filterHolder}>
-          <Filter onChange={this.handleQueryChange}/>
+          <Filter filter={filter} onChange={this.handleQueryChange}/>
         </div>
 
         <div className={classes.listHolder}>
           <div className={classes.sortBarHolder}>
-            <SortBar onChange={this.handleQueryChange}/>
+            <SortBar filter={filter} onChange={this.handleQueryChange}/>
           </div>
 
           <CarList filter={filter} />
@@ -49,4 +49,4 @@ class CarListPage extends React.Component<IProps> {
   }
 }
 
-export default injectSheet(style as any)(CarListPage);
+export default injectSheet(style)(CarListPage);

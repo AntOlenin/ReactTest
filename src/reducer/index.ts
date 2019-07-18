@@ -1,13 +1,13 @@
-import { ActionTypes, ReduxStateEntity, ReduxStateMeta } from '../types';
+import { ActionTypes, IReduxStateEntity, IReduxStateMeta } from '../types';
 import { combineReducers } from 'redux';
 
-const defaultState: ReduxStateEntity = {
+const defaultState: IReduxStateEntity = {
   cars: [],
   manufacturers: [],
   colors: [],
 };
 
-const entity = (state: ReduxStateEntity = defaultState, action: any) => {
+const entity = (state: IReduxStateEntity = defaultState, action: any) => {
   const { type, payload } = action;
 
   switch (type) {
@@ -28,7 +28,7 @@ const entity = (state: ReduxStateEntity = defaultState, action: any) => {
   }
 };
 
-const meta = (state: ReduxStateMeta = {}, action: any) => {
+const meta = (state: IReduxStateMeta = {}, action: any) => {
   const { type, payload } = action;
 
   switch (type) {

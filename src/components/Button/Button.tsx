@@ -19,4 +19,4 @@ class Button extends React.PureComponent<IProps> {
   }
 }
 
-export default injectSheet(style as any)(Button);
+export default injectSheet(style)(Button);

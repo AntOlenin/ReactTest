@@ -1,16 +1,16 @@
-export interface ReduxStateEntity {
+export interface IReduxStateEntity {
   cars: Array<ICar>;
   manufacturers: Array<IManufacturer>;
   colors: Array<string>;
 }
 
-export interface ReduxStateMeta {
+export interface IReduxStateMeta {
   totalPageCount?: number;
 }
 
-export interface ReduxState {
-  entity: ReduxStateEntity,
-  meta: ReduxStateMeta,
+export interface IReduxState {
+  entity: IReduxStateEntity,
+  meta: IReduxStateMeta,
 }
 
 export enum ActionTypes {
@@ -36,3 +36,12 @@ export interface IManufacturer {
   name: string;
   uuid: string;
 }
+
+enum FilterParams {
+  page = 'page',
+  sort = 'sort',
+  manufacturer = 'manufacturer',
+  color = 'color',
+}
+
+export type Filter = Record<FilterParams, string>;

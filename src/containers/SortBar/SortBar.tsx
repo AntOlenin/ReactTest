@@ -5,7 +5,7 @@ import { Classes } from '../../theme';
 import Select from '../../components/Select';
 import Text from '../../components/Text';
 import style from './style';
-import { IManufacturer, ReduxState } from '../../types';
+import { IReduxState, Filter } from '../../types';
 
 enum Sort {
   asc = 'asc',
@@ -20,6 +20,7 @@ const options = [
 interface IProps {
   classes: Classes;
   onChange: any;
+  filter: Filter;
 }
 
 class SortBar extends React.PureComponent<IProps> {
@@ -29,7 +30,7 @@ class SortBar extends React.PureComponent<IProps> {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, filter } = this.props;
 
     return (
       <div className={classes.root}>
@@ -41,7 +42,7 @@ class SortBar extends React.PureComponent<IProps> {
         <Select
           name="sort"
           label="Sort by"
-          value={Sort.asc}
+          value={filter.sort || Sort.asc}
           options={options}
           onChange={this.handleChange}
         />
@@ -50,10 +51,9 @@ class SortBar extends React.PureComponent<IProps> {
   }
 }
 
-const mapStateToProps = (state: ReduxState) => {
+const mapStateToProps = (state: IReduxState) => {
   const { colors, manufacturers } = state.entity;
   return { colors, manufacturers };
 };
 
-// @ts-ignore
 export default connect(mapStateToProps)(injectSheet(style)(SortBar));

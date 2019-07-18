@@ -20,4 +20,4 @@ class NotFoundPage extends React.Component<ICommonProps> {
   }
 }
 
-export default injectSheet(style as any)(NotFoundPage);
+export default injectSheet(style)(NotFoundPage);

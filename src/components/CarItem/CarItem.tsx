@@ -44,4 +44,4 @@ class CarItem extends React.PureComponent<IProps> {
   }
 }
 
-export default injectSheet(style as any)(CarItem);
+export default injectSheet(style)(CarItem);

@@ -16,4 +16,4 @@ const Footer: React.FC<IProps> = ({ classes }) => {
   );
 };
 
-export default injectSheet(style as any)(Footer);
+export default injectSheet(style)(Footer);

@@ -31,7 +31,7 @@ export function getCar(req: MockRequest, res: MockResponse) {
 
   const car = stockNumber
     ? cars.find(function(eachCar) {
-        return eachCar.stockNumber == Number(stockNumber[0]);
+        return eachCar.stockNumber === Number(stockNumber[0]);
       })
     : null;
 

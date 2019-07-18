@@ -28,4 +28,4 @@ class Layout extends React.Component<IProps> {
   }
 }
 
-export default injectSheet(style as any)(Layout);
+export default injectSheet(style)(Layout);

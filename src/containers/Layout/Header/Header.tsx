@@ -27,4 +27,4 @@ class Header extends React.PureComponent<IProps> {
   }
 }
 
-export default injectSheet(style as any)(Header);
+export default injectSheet(style)(Header);
