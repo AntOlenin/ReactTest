@@ -23,16 +23,21 @@ export interface IReduxStateLocalStorage {
   [LocalStorageKeys.favoriteCars]: Array<number>;
 }
 
+export type ReduxStateError = number;
+
 export interface IReduxState {
   entity: IReduxStateEntity,
   meta: IReduxStateMeta,
   localStorage: IReduxStateLocalStorage,
+  error: ReduxStateError,
 }
 
 export enum ActionTypes {
   LOAD_ENTITY_LIST_SUCCESS,
   LOAD_ENTITY_SUCCESS,
   UPDATE_LOCAL_STORAGE,
+  REQUEST_ERROR,
+  CLEAR_ERROR,
 }
 
 export interface ICar {

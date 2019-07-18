@@ -10,6 +10,7 @@ type LoadEntityList = (args: { resource: Resource; filter?: FilterParams; }) => 
 type LoadEntity = (args: { resource: Resource; id: string | number; }) => (dispatch: Dispatch) => Promise<void>;
 type AddCarToLocalStorage = (args: { id: string | number; }) => void;
 type RemoveCarFromFavorite = (args: { id: string | number; }) => void;
+type ClearError = () => void;
 
 const metaKeysMap: Record<Resource, Array<string>> = {
   [Resource.colors]: [],
@@ -43,10 +44,15 @@ const resourceSingularDataMap = {
 
 const loadEntity: LoadEntity = ({ resource, id }) => async (dispatch) => {
   const url = `${API_PREFIX}/${resource}/${id}`;
-  const response = await axios({ url });
-  const data = response.data[resourceSingularDataMap[resource]];
 
-  dispatch({ type: ActionTypes.LOAD_ENTITY_SUCCESS, payload: { resource, data } })
+  try {
+    const response = await axios({ url });
+    const data = response.data[resourceSingularDataMap[resource]];
+
+    dispatch({ type: ActionTypes.LOAD_ENTITY_SUCCESS, payload: { resource, data } })
+  } catch (err) {
+    dispatch({ type: ActionTypes.REQUEST_ERROR, payload: { statusCode: err.response.status } })
+  }
 };
 
 const addCarToFavorite: AddCarToLocalStorage = ({ id }) => {
@@ -59,9 +65,14 @@ const removeCarFromFavorite: RemoveCarFromFavorite = ({ id }) => {
   return { type: ActionTypes.UPDATE_LOCAL_STORAGE, payload: { key: LocalStorageKeys.favoriteCars, value } }
 };
 
+const clearError: ClearError = () => {
+  return { type: ActionTypes.CLEAR_ERROR }
+};
+
 export default {
   loadEntityList,
   loadEntity,
   addCarToFavorite,
   removeCarFromFavorite,
+  clearError,
 }

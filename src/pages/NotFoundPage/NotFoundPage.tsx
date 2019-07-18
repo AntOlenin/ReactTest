@@ -1,12 +1,23 @@
 import React from 'react';
 import injectSheet from 'react-jss';
+import { connect } from 'react-redux';
 import Layout from '../../containers/Layout';
 import Link from '../../components/Link';
 import Text from '../../components/Text';
 import Logo from '../../components/Logo';
+import actions from '../../actions';
 import style from './style';
 
-class NotFoundPage extends React.Component<ICommonProps> {
+interface IProps extends ICommonProps {
+  dispatch: any;
+}
+
+class NotFoundPage extends React.Component<IProps> {
+  componentWillUnmount() {
+    const { dispatch } = this.props;
+    dispatch(actions.clearError());
+  }
+
   render() {
     const { classes } = this.props;
 
@@ -23,4 +34,4 @@ class NotFoundPage extends React.Component<ICommonProps> {
   }
 }
 
-export default injectSheet(style)(NotFoundPage);
+export default connect()(injectSheet(style)(NotFoundPage));

@@ -5,6 +5,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import Layout from '../../containers/Layout';
 import Text from '../../components/Text';
 import Button from '../../components/Button';
+import NotFoundPage from '../NotFoundPage';
 import { getCarInfo, getCarTitle } from '../../helpers/car';
 import { ICar, IReduxState, Resource } from '../../types';
 import actions from '../../actions';
@@ -13,8 +14,9 @@ import style from './style';
 interface IProps extends ICommonProps, RouteComponentProps<{ id: string }> {
   car: ICar;
   dispatch: any;
-  id: number;
+  id: string;
   isFavorite: boolean;
+  error: number;
 }
 
 class CarDetailPage extends React.Component<IProps> {
@@ -34,7 +36,13 @@ class CarDetailPage extends React.Component<IProps> {
   };
 
   render() {
-    const { classes, car, isFavorite } = this.props;
+    const { classes, car, isFavorite, error } = this.props;
+
+    if (error) {
+      return (
+        <NotFoundPage />
+      )
+    }
 
     if (!car) {
       return null;
@@ -76,11 +84,11 @@ class CarDetailPage extends React.Component<IProps> {
 }
 
 const mapStateToProps = (state: IReduxState, { match }: IProps) => {
-  const { entity, localStorage: { favoriteCars } } = state;
-  const id = Number(match.params.id);
-  const car = entity.cars.find(car => car.stockNumber === id);
-  const isFavorite = favoriteCars.includes(id);
-  return { id, car, isFavorite };
+  const { entity, localStorage: { favoriteCars }, error } = state;
+  const { id } = match.params;
+  const car = entity.cars.find(car => car.stockNumber === Number(id));
+  const isFavorite = favoriteCars.includes(Number(id));
+  return { id, car, isFavorite, error };
 };
 
 export default connect(mapStateToProps)(injectSheet(style)(CarDetailPage));

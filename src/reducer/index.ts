@@ -28,10 +28,17 @@ interface ILocalStorageAction extends BaseAction {
   }
 }
 
+interface IErrorAction extends BaseAction {
+  payload?: {
+    statusCode: number;
+  }
+}
+
 type Reducer<T, A> = (state: T, action: A) => T;
 type EntityReducer = Reducer<T.IReduxStateEntity, IEntityAction>;
 type MetaReducer = Reducer<T.IReduxStateMeta, IMetaAction>;
 type LocalStorageReducer = Reducer<T.IReduxStateLocalStorage, ILocalStorageAction>;
+type ErrorStorageReducer = Reducer<T.ReduxStateError, IErrorAction>;
 
 const defaultEntityState: T.IReduxStateEntity = {
   [T.Resource.cars]: [],
@@ -94,5 +101,19 @@ const localStorage: LocalStorageReducer = (state = defaultLocalStorageState, act
   }
 };
 
-export default combineReducers({ entity, meta, localStorage });
+const error: ErrorStorageReducer = (state = null, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case T.ActionTypes.REQUEST_ERROR:
+      const { statusCode } = payload;
+      return statusCode;
+    case T.ActionTypes.CLEAR_ERROR:
+      return null;
+    default:
+      return state
+  }
+};
+
+export default combineReducers({ entity, meta, localStorage, error });
 
