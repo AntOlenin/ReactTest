@@ -8,7 +8,8 @@ export default (theme: Theme) => ({
   },
   picture: {
     marginRight: theme.layout.spacing.l,
-    background: theme.color.placeholder,
+    backgroundSize: 'cover',
+    // background: theme.color.placeholder,
     width: 90,
     height: 70,
   },

@@ -19,7 +19,7 @@ class Header extends React.PureComponent<IProps> {
 
         <div className={classes.menu}>
           <Text className={classes.menuItem}>Purchase</Text>
-          <Text className={classes.menuItem}>My Orders</Text>
+          <Text className={classes.menuItem}>My&nbsp;Orders</Text>
           <Text className={classes.menuItem}>Sell</Text>
         </div>
       </div>

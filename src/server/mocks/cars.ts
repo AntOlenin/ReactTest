@@ -24,6 +24,6 @@ for (var i = 0; i < 1000; i++) {
       unit: 'km'
     },
     fuelType,
-    pictureUrl: '/images/car.svg'
+    pictureUrl: '/images/car.png'
   });
 }

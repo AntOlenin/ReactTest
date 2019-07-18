@@ -8,6 +8,7 @@ export default (theme: Theme) => ({
     width: '100%',
     height: 300,
     background: theme.color.placeholder,
+    backgroundSize: 'cover',
   },
   content: {
     display: 'flex',

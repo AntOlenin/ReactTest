@@ -37,7 +37,7 @@ class CarDetailPage extends React.Component<IProps> {
 
     return (
       <Layout contentClassName={classes.root}>
-        <div className={classes.cover} />
+        <div className={classes.cover} style={{ backgroundImage: `url(${car.pictureUrl})` }} />
 
         <div className={classes.content}>
           <div className={classes.description}>

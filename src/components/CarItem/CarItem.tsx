@@ -27,13 +27,11 @@ class CarItem extends React.PureComponent<IProps> {
 
   render() {
     const { classes, car } = this.props;
-    const { pictureUrl, manufacturerName, stockNumber } = car;
+    const { pictureUrl, stockNumber } = car;
 
     return (
       <div className={classes.root}>
-        <div className={classes.picture}>
-          <img src={pictureUrl} alt={manufacturerName}/>
-        </div>
+        <div className={classes.picture} style={{ backgroundImage: `url(${pictureUrl})` }} />
         <div className={classes.content}>
           {this.renderTitle()}
           {this.renderInfo()}
