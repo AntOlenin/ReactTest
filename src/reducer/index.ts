@@ -1,46 +1,53 @@
-import { ActionTypes, ICar, IManufacturer, IReduxStateEntity, IReduxStateMeta, Resource } from '../types';
+import * as T from '../types';
 import { combineReducers } from 'redux';
 
-const defaultState: IReduxStateEntity = {
-  [Resource.cars]: [],
-  [Resource.manufacturers]: [],
-  [Resource.colors]: [],
-};
-
 interface BaseAction {
-  type: ActionTypes;
+  type: T.ActionTypes;
 }
 
 interface IEntityAction extends BaseAction {
   payload: {
-    resource: Resource;
-    list?: Array<ICar> | Array<IManufacturer> | Array<string>;
-    data?: ICar;
+    resource: T.Resource;
+    list?: Array<T.ICar> | Array<T.IManufacturer> | Array<string>;
+    data?: T.ICar;
   }
 }
 
 interface IMetaAction extends BaseAction {
   payload: {
     meta: Record<string, string | number>;
-    list?: Array<ICar> | Array<IManufacturer> | Array<string>;
-    data?: ICar;
+    list?: Array<T.ICar> | Array<T.IManufacturer> | Array<string>;
+    data?: T.ICar;
+  }
+}
+
+interface ILocalStorageAction extends BaseAction {
+  payload: {
+    key: string;
+    value: Array<number>;
   }
 }
 
 type Reducer<T, A> = (state: T, action: A) => T;
-type EntityReducer = Reducer<IReduxStateEntity, IEntityAction>;
-type MetaReducer = Reducer<IReduxStateMeta, IMetaAction>;
+type EntityReducer = Reducer<T.IReduxStateEntity, IEntityAction>;
+type MetaReducer = Reducer<T.IReduxStateMeta, IMetaAction>;
+type LocalStorageReducer = Reducer<T.IReduxStateLocalStorage, ILocalStorageAction>;
 
-const entity: EntityReducer = (state = defaultState, action) => {
+const defaultEntityState: T.IReduxStateEntity = {
+  [T.Resource.cars]: [],
+  [T.Resource.manufacturers]: [],
+  [T.Resource.colors]: [],
+};
+const entity: EntityReducer = (state = defaultEntityState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case ActionTypes.LOAD_ENTITY_LIST_SUCCESS:
+    case T.ActionTypes.LOAD_ENTITY_LIST_SUCCESS:
       return {
         ...state,
         [payload.resource]: payload.list
       };
-    case ActionTypes.LOAD_ENTITY_SUCCESS:
+    case T.ActionTypes.LOAD_ENTITY_SUCCESS:
       return {
         ...state,
         [payload.resource]: [
@@ -56,7 +63,7 @@ const meta: MetaReducer = (state = {}, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case ActionTypes.LOAD_ENTITY_LIST_SUCCESS:
+    case T.ActionTypes.LOAD_ENTITY_LIST_SUCCESS:
       const { meta } = payload;
 
       return {
@@ -68,5 +75,24 @@ const meta: MetaReducer = (state = {}, action) => {
   }
 };
 
-export default combineReducers({ entity, meta });
+const defaultLocalStorageState: T.IReduxStateLocalStorage = {
+  [T.LocalStorageKeys.favoriteCars]: [],
+};
+const localStorage: LocalStorageReducer = (state = defaultLocalStorageState, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case T.ActionTypes.UPDATE_LOCAL_STORAGE:
+      const { key, value } = payload;
+
+      return {
+        ...state,
+        [key]: value,
+      };
+    default:
+      return state
+  }
+};
+
+export default combineReducers({ entity, meta, localStorage });
 

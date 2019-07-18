@@ -14,14 +14,24 @@ export interface IReduxStateMeta {
   totalPageCount?: number;
 }
 
+export enum LocalStorageKeys {
+  favoriteCars = 'favoriteCars'
+}
+
+export interface IReduxStateLocalStorage {
+  [LocalStorageKeys.favoriteCars]: Array<number>;
+}
+
 export interface IReduxState {
   entity: IReduxStateEntity,
   meta: IReduxStateMeta,
+  localStorage: IReduxStateLocalStorage,
 }
 
 export enum ActionTypes {
   LOAD_ENTITY_LIST_SUCCESS,
   LOAD_ENTITY_SUCCESS,
+  UPDATE_LOCAL_STORAGE,
 }
 
 export interface ICar {

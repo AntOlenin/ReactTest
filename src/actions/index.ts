@@ -1,12 +1,15 @@
 import axios from 'axios';
 import qs from 'qs';
-import { ActionTypes, FilterParams, Resource } from '../types';
 import { Dispatch } from 'redux';
+import { ActionTypes, FilterParams, LocalStorageKeys, Resource } from '../types';
+import { addToList, removeFromList } from '../helpers/ls';
 
 const API_PREFIX = '/api';
 
 type LoadEntityList = (args: { resource: Resource; filter?: FilterParams; }) => (dispatch: Dispatch) => Promise<void>;
 type LoadEntity = (args: { resource: Resource; id: string | number; }) => (dispatch: Dispatch) => Promise<void>;
+type AddCarToLocalStorage = (args: { id: string | number; }) => void;
+type RemoveCarFromFavorite = (args: { id: string | number; }) => void;
 
 const loadEntityList: LoadEntityList = ({ resource, filter = {} }) => async (dispatch) => {
   const querystring = qs.stringify(filter);
@@ -35,7 +38,19 @@ const loadEntity: LoadEntity = ({ resource, id }) => async (dispatch) => {
   dispatch({ type: ActionTypes.LOAD_ENTITY_SUCCESS, payload: { resource, data } })
 };
 
+const addCarToFavorite: AddCarToLocalStorage = ({ id }) => {
+  const value = addToList({ listName: LocalStorageKeys.favoriteCars, value: id });
+  return { type: ActionTypes.UPDATE_LOCAL_STORAGE, payload: { key: LocalStorageKeys.favoriteCars, value } }
+};
+
+const removeCarFromFavorite: RemoveCarFromFavorite = ({ id }) => {
+  const value = removeFromList({ listName: LocalStorageKeys.favoriteCars, value: id });
+  return { type: ActionTypes.UPDATE_LOCAL_STORAGE, payload: { key: LocalStorageKeys.favoriteCars, value } }
+};
+
 export default {
   loadEntityList,
   loadEntity,
+  addCarToFavorite,
+  removeCarFromFavorite,
 }

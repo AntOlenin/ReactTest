@@ -14,6 +14,7 @@ interface IProps extends ICommonProps, RouteComponentProps<{ id: string }> {
   car: ICar;
   dispatch: any;
   id: number;
+  isFavorite: boolean;
 }
 
 class CarDetailPage extends React.Component<IProps> {
@@ -23,10 +24,17 @@ class CarDetailPage extends React.Component<IProps> {
   }
 
   handleSaveClick = () => {
+    const { dispatch, car: { stockNumber } } = this.props;
+    dispatch(actions.addCarToFavorite({ id: stockNumber }));
+  };
+
+  handleRemoveClick = () => {
+    const { dispatch, car: { stockNumber } } = this.props;
+    dispatch(actions.removeCarFromFavorite({ id: stockNumber }));
   };
 
   render() {
-    const { classes, car } = this.props;
+    const { classes, car, isFavorite } = this.props;
 
     if (!car) {
       return null;
@@ -55,10 +63,10 @@ class CarDetailPage extends React.Component<IProps> {
             <Text size="m">If you like this car, click the button and save it in your collection of favourite items.</Text>
 
             <div className={classes.actions}>
-              <Button
-                text="Save"
-                onClick={this.handleSaveClick}
-              />
+              {isFavorite
+                ? <Button text="Remove" onClick={this.handleRemoveClick} />
+                : <Button text="Save" onClick={this.handleSaveClick} />
+              }
             </div>
           </div>
         </div>
@@ -68,9 +76,11 @@ class CarDetailPage extends React.Component<IProps> {
 }
 
 const mapStateToProps = (state: IReduxState, { match }: IProps) => {
+  const { entity, localStorage: { favoriteCars } } = state;
   const id = Number(match.params.id);
-  const car = state.entity.cars.find(car => car.stockNumber === id);
-  return { id, car };
+  const car = entity.cars.find(car => car.stockNumber === id);
+  const isFavorite = favoriteCars.includes(id);
+  return { id, car, isFavorite };
 };
 
 export default connect(mapStateToProps)(injectSheet(style)(CarDetailPage));
