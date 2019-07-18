@@ -20,7 +20,7 @@ export enum LocalStorageKeys {
 }
 
 export interface IReduxStateLocalStorage {
-  [LocalStorageKeys.favoriteCars]: Array<number>;
+  [LocalStorageKeys.favoriteCars]: Array<number | string>;
 }
 
 export type ReduxStateError = number;

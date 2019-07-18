@@ -1,5 +1,6 @@
-import * as T from '../types';
 import { combineReducers } from 'redux';
+import * as T from '../types';
+import { getLocalStorageList } from '../helpers/ls';
 
 interface BaseAction {
   type: T.ActionTypes;
@@ -83,7 +84,7 @@ const meta: MetaReducer = (state = {}, action) => {
 };
 
 const defaultLocalStorageState: T.IReduxStateLocalStorage = {
-  [T.LocalStorageKeys.favoriteCars]: [],
+  [T.LocalStorageKeys.favoriteCars]: getLocalStorageList(T.LocalStorageKeys.favoriteCars),
 };
 const localStorage: LocalStorageReducer = (state = defaultLocalStorageState, action) => {
   const { type, payload } = action;

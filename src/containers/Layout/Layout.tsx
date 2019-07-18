@@ -4,12 +4,18 @@ import classnames from 'classnames';
 import Header from './Header';
 import Footer from './Footer';
 import style from './style';
+import { IReduxState } from '../../types';
+import { connect } from 'react-redux';
 
 interface IProps extends ICommonProps {
   contentClassName?: string;
 }
 
-class Layout extends React.Component<IProps> {
+class Layout extends React.PureComponent<IProps> {
+  componentDidMount() {
+    debugger
+  }
+
   render() {
     const { classes, children } = this.props;
     const contentClassName = classnames(classes.content, this.props.contentClassName);
@@ -28,4 +34,8 @@ class Layout extends React.Component<IProps> {
   }
 }
 
-export default injectSheet(style)(Layout);
+const mapStateToProps = (state: IReduxState) => {
+  return { error: state.error };
+};
+
+export default connect(mapStateToProps)(injectSheet(style)(Layout));

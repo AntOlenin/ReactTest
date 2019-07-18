@@ -2,7 +2,7 @@ import axios from 'axios';
 import qs from 'qs';
 import { Dispatch } from 'redux';
 import { ActionTypes, FilterParams, LocalStorageKeys, Resource } from '../types';
-import { addToList, removeFromList } from '../helpers/ls';
+import { addToLocalStorageList, removeFromLocalStorageList } from '../helpers/ls';
 
 const API_PREFIX = '/api';
 
@@ -56,12 +56,12 @@ const loadEntity: LoadEntity = ({ resource, id }) => async (dispatch) => {
 };
 
 const addCarToFavorite: AddCarToLocalStorage = ({ id }) => {
-  const value = addToList({ listName: LocalStorageKeys.favoriteCars, value: id });
+  const value = addToLocalStorageList({ listName: LocalStorageKeys.favoriteCars, value: id });
   return { type: ActionTypes.UPDATE_LOCAL_STORAGE, payload: { key: LocalStorageKeys.favoriteCars, value } }
 };
 
 const removeCarFromFavorite: RemoveCarFromFavorite = ({ id }) => {
-  const value = removeFromList({ listName: LocalStorageKeys.favoriteCars, value: id });
+  const value = removeFromLocalStorageList({ listName: LocalStorageKeys.favoriteCars, value: id });
   return { type: ActionTypes.UPDATE_LOCAL_STORAGE, payload: { key: LocalStorageKeys.favoriteCars, value } }
 };
 

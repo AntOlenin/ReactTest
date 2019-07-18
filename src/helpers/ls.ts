@@ -1,13 +1,19 @@
 import { LocalStorageKeys } from '../types';
 
-type LocalStorageHelper = (args: { listName: LocalStorageKeys, value: string | number }) => Array<number>;
+type Value = number | string;
+type LocalStorageHelper = (args: { listName: LocalStorageKeys, value: Value }) => Array<Value>;
+type GetLocalStorageList = (listName: LocalStorageKeys) => Array<Value>;
 
-export const addToList: LocalStorageHelper = ({ listName, value }) => {
+export const getLocalStorageList: GetLocalStorageList = (listName) => {
   const json = window.localStorage.getItem(listName);
-  const list = json ? JSON.parse(json) : [];
+  return json ? JSON.parse(json) : [];
+};
+
+export const addToLocalStorageList: LocalStorageHelper = ({ listName, value }) => {
+  const list = getLocalStorageList(listName);
 
   if (list.includes(value)) {
-    return;
+    return list;
   }
 
   const newList = [...list, value];
@@ -15,9 +21,8 @@ export const addToList: LocalStorageHelper = ({ listName, value }) => {
   return newList;
 };
 
-export const removeFromList: LocalStorageHelper = ({ listName, value }) => {
-  const json = window.localStorage.getItem(listName);
-  const list = json ? JSON.parse(json) : [];
+export const removeFromLocalStorageList: LocalStorageHelper = ({ listName, value }) => {
+  const list = getLocalStorageList(listName);
 
   const newList = list.filter((existingValue: string | number) => existingValue !== value);
   window.localStorage.setItem(listName, JSON.stringify(newList));
