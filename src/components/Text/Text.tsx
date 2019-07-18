@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import injectSheet from 'react-jss';
 import style from './style';
 
-interface IProps extends ICommonProps {
+export interface IProps extends ICommonProps {
   size?: 's' | 'm' | 'l' | 'xl';
   bold?: boolean;
   block?: boolean;

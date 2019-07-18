@@ -19,13 +19,4 @@ export default (theme: Theme) => ({
   text: {
     marginBottom: theme.layout.spacing.s,
   },
-  link: {
-    fontSize: theme.font.size.s,
-    color: theme.color.button,
-    textDecoration: 'none',
-
-    '&:hover': {
-      textDecoration: 'underline',
-    }
-  }
 });

@@ -6,6 +6,7 @@ export default (theme: Theme) => {
   return {
     root: {
       fontFamily: 'roboto',
+      color: theme.color.primary,
     },
     content: {
       minHeight: `calc(100vh - ${headerAndFooterHeight}px)`,

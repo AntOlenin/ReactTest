@@ -1,10 +1,9 @@
 import React from 'react';
 import qs from 'qs';
-import classnames from 'classnames';
 import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
-import { Link } from 'react-router-dom';
 import Text from '../../components/Text';
+import Link from '../../components/Link';
 import { Classes } from '../../theme';
 import { IReduxState, FilterParams } from '../../types';
 import style from './style';
@@ -26,7 +25,6 @@ class Pagination extends React.PureComponent<IProps> {
 
   render() {
     const { classes, totalPageCount, filter } = this.props;
-    const linkClassName = classnames(classes.link, classes.item);
     const currentPage = Number(filter.page) || 1;
     const hasPrev = currentPage > 1;
     const hasNext = currentPage < totalPageCount;
@@ -35,11 +33,11 @@ class Pagination extends React.PureComponent<IProps> {
 
     return (
       <div className={classes.root}>
-        {hasPrev && <Link to={this.getHrefWithUpdatedPage(1)} className={linkClassName}>First</Link>}
-        {hasPrev && <Link to={this.getHrefWithUpdatedPage(prevPage)} className={linkClassName}>Previous</Link>}
+        <Link disabled={!hasPrev} className={classes.item} to={this.getHrefWithUpdatedPage(1)} textProps={{ size: 's' }}>First</Link>
+        <Link disabled={!hasPrev} className={classes.item} to={this.getHrefWithUpdatedPage(prevPage)} textProps={{ size: 's' }}>Previous</Link>
         <Text size="s" className={classes.item}>Page {currentPage} of {totalPageCount}</Text>
-        {hasNext && <Link to={this.getHrefWithUpdatedPage(nextPage)} className={linkClassName}>Next</Link>}
-        {hasNext && <Link to={this.getHrefWithUpdatedPage(totalPageCount)} className={linkClassName}>Last</Link>}
+        <Link disabled={!hasNext} className={classes.item} to={this.getHrefWithUpdatedPage(nextPage)} textProps={{ size: 's' }}>Next</Link>
+        <Link disabled={!hasNext} className={classes.item} to={this.getHrefWithUpdatedPage(totalPageCount)} textProps={{ size: 's' }}>Last</Link>
       </div>
     )
   }

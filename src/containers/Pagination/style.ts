@@ -3,6 +3,7 @@ import { Theme } from '../../theme';
 export default (theme: Theme) => ({
   root: {
     display: 'flex',
+    alignItems: 'baseline',
   },
   item: {
     marginRight: theme.layout.spacing.l,
@@ -11,13 +12,4 @@ export default (theme: Theme) => ({
       marginRight: 0,
     }
   },
-  link: {
-    fontSize: theme.font.size.s,
-    color: theme.color.button,
-    textDecoration: 'none',
-
-    '&:hover': {
-      textDecoration: 'underline',
-    }
-  }
 });

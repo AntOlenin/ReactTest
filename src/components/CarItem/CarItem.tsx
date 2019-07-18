@@ -1,8 +1,8 @@
 import React from 'react';
 import injectSheet from 'react-jss';
-import { Link } from 'react-router-dom';
 import { Classes } from '../../theme';
 import Text from '../../components/Text';
+import Link from '../../components/Link';
 import { ICar } from '../../types';
 import { getCarInfo, getCarTitle } from '../../helpers/car';
 import style from './style';
@@ -35,7 +35,7 @@ class CarItem extends React.PureComponent<IProps> {
         <div className={classes.content}>
           {this.renderTitle()}
           {this.renderInfo()}
-          <Link to={`/cars/${stockNumber}`} className={classes.link}>View details</Link>
+          <Link to={`/cars/${stockNumber}`} textProps={{ size: 's' }}>View details</Link>
         </div>
       </div>
     )

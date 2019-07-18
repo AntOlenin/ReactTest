@@ -2,7 +2,7 @@ import { Theme } from '../../theme';
 
 export default (theme: Theme) => ({
   root: {
-    color: theme.color.primary,
+    color: 'inherit',
     fontSize: theme.font.size.xl,
   },
 
