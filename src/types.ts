@@ -43,11 +43,21 @@ export interface IManufacturer {
   uuid: string;
 }
 
-enum FilterParams {
+export enum FilterKeys {
   page = 'page',
   sort = 'sort',
   manufacturer = 'manufacturer',
   color = 'color',
 }
 
-export type Filter = Record<FilterParams, string>;
+export enum SortTypes {
+  asc = 'asc',
+  desc = 'desc',
+}
+
+export interface FilterParams {
+  [FilterKeys.page]?: number | string;
+  [FilterKeys.sort]?: SortTypes;
+  manufacturer?: string;
+  color?: string;
+}

@@ -1,11 +1,11 @@
 import axios from 'axios';
 import qs from 'qs';
-import { ActionTypes, Filter, Resource } from '../types';
+import { ActionTypes, FilterParams, Resource } from '../types';
 import { Dispatch } from 'redux';
 
 const API_PREFIX = '/api';
 
-type LoadEntityList = (args: { resource: Resource; filter?: Filter; }) => (dispatch: Dispatch) => Promise<void>;
+type LoadEntityList = (args: { resource: Resource; filter?: FilterParams; }) => (dispatch: Dispatch) => Promise<void>;
 type LoadEntity = (args: { resource: Resource; id: string | number; }) => (dispatch: Dispatch) => Promise<void>;
 
 const loadEntityList: LoadEntityList = ({ resource, filter = {} }) => async (dispatch) => {

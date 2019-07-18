@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
 import CarItem from '../../components/CarItem';
 import { Classes } from '../../theme';
-import { ICar, IReduxState, Filter, Resource } from '../../types';
+import { ICar, IReduxState, FilterParams, Resource } from '../../types';
 import actions from '../../actions';
 import style from './style';
 
 interface IProps {
   classes: Classes;
-  filter: Filter;
+  filter: FilterParams;
   dispatch: any;
   cars?: Array<ICar>;
 }

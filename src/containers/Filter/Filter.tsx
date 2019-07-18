@@ -5,7 +5,7 @@ import { Classes } from '../../theme';
 import Select from '../../components/Select';
 import Button from '../../components/Button';
 import style from './style';
-import { IManufacturer, IReduxState, Filter as FilterType, Resource } from '../../types';
+import { IManufacturer, IReduxState, FilterParams, Resource } from '../../types';
 import actions from '../../actions';
 
 interface IProps {
@@ -13,8 +13,8 @@ interface IProps {
   dispatch: any;
   colors?: Array<string>;
   manufacturers?: Array<IManufacturer>;
-  onChange: any;
-  filter: FilterType;
+  onChange: (args: { color?: string; manufacturer?: string; }) => void;
+  filter: FilterParams;
 }
 
 interface IState {

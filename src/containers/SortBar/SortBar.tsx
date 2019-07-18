@@ -5,28 +5,24 @@ import { Classes } from '../../theme';
 import Select from '../../components/Select';
 import Text from '../../components/Text';
 import style from './style';
-import { IReduxState, Filter } from '../../types';
-
-enum Sort {
-  asc = 'asc',
-  desc = 'desc',
-}
+import { IReduxState, FilterParams, SortTypes, FilterKeys } from '../../types';
 
 const options = [
-  { value: Sort.asc, text: 'Mileage Ascending' },
-  { value: Sort.desc, text: 'Mileage Descending' }
+  { value: SortTypes.asc, text: 'Mileage Ascending' },
+  { value: SortTypes.desc, text: 'Mileage Descending' }
 ];
 
 interface IProps {
   classes: Classes;
-  onChange: any;
-  filter: Filter;
+  onChange: (args: FilterParams) => void;
+  filter: FilterParams;
 }
 
 class SortBar extends React.PureComponent<IProps> {
-  handleChange = ({ name, value }: any) => {
+  handleChange = (params: { value: string }) => {
+    const value = params.value as SortTypes;
     const { onChange } = this.props;
-    onChange({ [name]: value })
+    onChange({ [FilterKeys.sort]: value })
   };
 
   render() {
@@ -42,7 +38,7 @@ class SortBar extends React.PureComponent<IProps> {
         <Select
           name="sort"
           label="Sort by"
-          value={filter.sort || Sort.asc}
+          value={filter.sort || SortTypes.asc}
           options={options}
           onChange={this.handleChange}
         />

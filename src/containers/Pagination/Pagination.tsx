@@ -6,12 +6,12 @@ import injectSheet from 'react-jss';
 import { Link } from 'react-router-dom';
 import Text from '../../components/Text';
 import { Classes } from '../../theme';
-import { IReduxState, Filter } from '../../types';
+import { IReduxState, FilterParams } from '../../types';
 import style from './style';
 
 interface IProps {
   classes: Classes;
-  filter: Filter;
+  filter: FilterParams;
   totalPageCount?: number;
 }
 
