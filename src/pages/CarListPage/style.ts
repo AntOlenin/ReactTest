@@ -14,5 +14,8 @@ export default (theme: Theme) => ({
     display: 'flex',
     justifyContent: 'center',
     marginTop: theme.layout.spacing.l,
+  },
+  sortBarHolder: {
+    marginBottom: theme.layout.spacing.l,
   }
 });

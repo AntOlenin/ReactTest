@@ -27,7 +27,7 @@ class Pagination extends React.PureComponent<IProps> {
   render() {
     const { classes, totalPageCount, filter } = this.props;
     const linkClassName = classnames(classes.link, classes.item);
-    const currentPage = Number(filter.page) || 0;
+    const currentPage = Number(filter.page) || 1;
     const hasPrev = currentPage > 1;
     const hasNext = currentPage < totalPageCount;
     const nextPage = currentPage + 1;

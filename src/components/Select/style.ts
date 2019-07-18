@@ -52,7 +52,7 @@ export default (theme: Theme) => {
     options: {
       width: '100%',
       position: 'absolute',
-      top: theme.ui.select.height + theme.layout.spacing.m,
+      top: theme.ui.select.height + theme.layout.spacing.s,
       left: 0,
       borderRadius: theme.ui.select.borderRadius,
       border: `1px solid ${theme.color.border}`,
