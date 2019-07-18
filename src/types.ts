@@ -1,7 +1,13 @@
+export enum Resource {
+  cars = 'cars',
+  colors = 'colors',
+  manufacturers = 'manufacturers',
+}
+
 export interface IReduxStateEntity {
-  cars: Array<ICar>;
-  manufacturers: Array<IManufacturer>;
-  colors: Array<string>;
+  [Resource.cars]: Array<ICar>;
+  [Resource.manufacturers]: Array<IManufacturer>;
+  [Resource.colors]: Array<string>;
 }
 
 export interface IReduxStateMeta {

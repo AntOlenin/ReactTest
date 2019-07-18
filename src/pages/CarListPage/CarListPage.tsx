@@ -1,6 +1,7 @@
 import React from 'react';
 import qs from 'qs';
 import injectSheet from 'react-jss';
+import { RouteComponentProps } from 'react-router-dom';
 import Layout from '../../containers/Layout';
 import Filter from '../../containers/Filter';
 import CarList from '../../containers/CarList';
@@ -9,10 +10,7 @@ import SortBar from '../../containers/SortBar';
 
 import style from './style';
 
-interface IProps extends ICommonProps {
-  location: Location;
-  history: any;
-}
+interface IProps extends RouteComponentProps, ICommonProps {}
 
 class CarListPage extends React.Component<IProps> {
   handleQueryChange = (params: any) => {

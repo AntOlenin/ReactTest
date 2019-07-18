@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
 import CarItem from '../../components/CarItem';
 import { Classes } from '../../theme';
-import { ICar, IReduxState, Filter } from '../../types';
+import { ICar, IReduxState, Filter, Resource } from '../../types';
+import actions from '../../actions';
 import style from './style';
-import actions, { Resource } from '../../actions';
 
 interface IProps {
   classes: Classes;

@@ -5,8 +5,8 @@ import { Classes } from '../../theme';
 import Select from '../../components/Select';
 import Button from '../../components/Button';
 import style from './style';
-import { IManufacturer, IReduxState, Filter as FilterType } from '../../types';
-import actions, { Resource } from '../../actions';
+import { IManufacturer, IReduxState, Filter as FilterType, Resource } from '../../types';
+import actions from '../../actions';
 
 interface IProps {
   classes: Classes;
@@ -39,7 +39,7 @@ class Filter extends React.PureComponent<IProps, IState> {
     this.setState({ [name]: value })
   };
 
-  handleSubmit = (e: any) => {
+  handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { onChange } = this.props;
     const { color, manufacturer } = this.state;

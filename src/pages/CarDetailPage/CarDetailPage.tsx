@@ -1,19 +1,19 @@
 import React from 'react';
 import injectSheet from 'react-jss';
 import { connect } from 'react-redux';
+import { RouteComponentProps } from 'react-router-dom';
 import Layout from '../../containers/Layout';
 import Text from '../../components/Text';
 import Button from '../../components/Button';
 import { getCarInfo, getCarTitle } from '../../helpers/car';
-import { ICar, IReduxState } from '../../types';
-import actions, { Resource } from '../../actions';
+import { ICar, IReduxState, Resource } from '../../types';
+import actions from '../../actions';
 import style from './style';
 
-interface IProps extends ICommonProps {
+interface IProps extends ICommonProps, RouteComponentProps<{ id: string }> {
   car: ICar;
   dispatch: any;
-  match: any;
-  id: any;
+  id: number;
 }
 
 class CarDetailPage extends React.Component<IProps> {
