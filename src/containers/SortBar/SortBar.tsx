@@ -26,12 +26,15 @@ class SortBar extends React.PureComponent<IProps> {
 
   render() {
     const { classes, filter, totalCarsCount } = this.props;
+    const showingCarsCount = totalCarsCount < 10 ? totalCarsCount : 10;
 
     return (
       <div className={classes.root}>
         <div className={classes.meta}>
           <Text block bold size="l">Available cars</Text>
-          <Text block size="l" className={classes.metaResults}>Showing 10 of {totalCarsCount} results</Text>
+          <Text block size="l" className={classes.metaResults}>
+            Showing {showingCarsCount} of {totalCarsCount} results
+          </Text>
         </div>
 
         <Select

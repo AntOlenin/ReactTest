@@ -3,7 +3,7 @@ import { getCars, getCar } from './controllers/cars';
 import { getColors } from './controllers/colors';
 import { getManufacturers } from './controllers/manufacturers';
 
-const delayTimeout = 2000;
+const delayTimeout = 1000;
 
 mock.setup();
 mock.get(/\/api\/cars\/[0-9]/, getCar);

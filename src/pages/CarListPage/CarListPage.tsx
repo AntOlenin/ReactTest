@@ -17,7 +17,7 @@ class CarListPage extends React.Component<IProps> {
   handleQueryChange = (params: FilterParams) => {
     const { location } = this.props;
     const filter = qs.parse(location.search.slice(1));
-    const newFilter = { ...filter, ...params };
+    const newFilter = { ...filter, ...params, page: 1 };
     const querystring = qs.stringify(newFilter);
     this.props.history.push({ search: querystring });
   };
