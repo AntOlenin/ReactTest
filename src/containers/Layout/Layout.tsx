@@ -1,11 +1,11 @@
 import React from 'react';
 import injectSheet from 'react-jss';
 import classnames from 'classnames';
+import { connect } from 'react-redux';
 import Header from './Header';
 import Footer from './Footer';
-import style from './style';
 import { IReduxState } from '../../types';
-import { connect } from 'react-redux';
+import style from './style';
 
 interface IProps extends ICommonProps {
   contentClassName?: string;
