@@ -1,7 +1,7 @@
 import axios from 'axios';
 import qs from 'qs';
 import { Dispatch } from 'redux';
-import { ActionTypes, FilterParams, LocalStorageKeys, Resource } from '../types';
+import { ActionTypes, FilterParams, LocalStorageKeys, Resource, ProgressIds } from '../types';
 import { addToLocalStorageList, removeFromLocalStorageList } from '../helpers/ls';
 
 const API_PREFIX = '/api';
@@ -18,10 +18,19 @@ const metaKeysMap: Record<Resource, Array<string>> = {
   [Resource.cars]: ['totalPageCount', 'totalCarsCount'],
 };
 
+const entityListProgressMap: Record<Resource, ProgressIds> = {
+  [Resource.cars]: ProgressIds.carsList,
+  [Resource.manufacturers]: ProgressIds.manufacturersList,
+  [Resource.colors]: ProgressIds.colorsList,
+};
+
 const loadEntityList: LoadEntityList = ({ resource, filter = {} }) => async (dispatch) => {
   const querystring = qs.stringify(filter);
   const url = `${API_PREFIX}/${resource}/?${querystring}`;
+
+  dispatch({ type: ActionTypes.LOADING_START, payload: { id: entityListProgressMap[resource] } });
   const response = await axios({ url });
+  dispatch({ type: ActionTypes.LOADING_STOP, payload: { id: entityListProgressMap[resource] } });
 
   const list = response.data[resource];
   const metaKeys = metaKeysMap[resource];

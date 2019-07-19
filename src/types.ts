@@ -4,6 +4,12 @@ export enum Resource {
   manufacturers = 'manufacturers',
 }
 
+export enum ProgressIds {
+  carsList,
+  manufacturersList,
+  colorsList,
+}
+
 export interface IReduxStateEntity {
   [Resource.cars]: Array<ICar>;
   [Resource.manufacturers]: Array<IManufacturer>;
@@ -24,12 +30,18 @@ export interface IReduxStateLocalStorage {
 }
 
 export type ReduxStateError = number;
+export interface ReduxStateProgress {
+  [ProgressIds.colorsList]?: boolean;
+  [ProgressIds.manufacturersList]?: boolean;
+  [ProgressIds.carsList]?: boolean;
+}
 
 export interface IReduxState {
   entity: IReduxStateEntity,
   meta: IReduxStateMeta,
   localStorage: IReduxStateLocalStorage,
   error: ReduxStateError,
+  progress: ReduxStateProgress,
 }
 
 export enum ActionTypes {
@@ -38,6 +50,8 @@ export enum ActionTypes {
   UPDATE_LOCAL_STORAGE,
   REQUEST_ERROR,
   CLEAR_ERROR,
+  LOADING_START,
+  LOADING_STOP,
 }
 
 export interface ICar {

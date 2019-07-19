@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import * as T from '../types';
 import { getLocalStorageList } from '../helpers/ls';
+import { ProgressIds } from '../types';
 
 interface BaseAction {
   type: T.ActionTypes;
@@ -35,11 +36,18 @@ interface IErrorAction extends BaseAction {
   }
 }
 
+interface IProgressAction extends BaseAction {
+  payload: {
+    id: ProgressIds;
+  }
+}
+
 type Reducer<T, A> = (state: T, action: A) => T;
 type EntityReducer = Reducer<T.IReduxStateEntity, IEntityAction>;
 type MetaReducer = Reducer<T.IReduxStateMeta, IMetaAction>;
 type LocalStorageReducer = Reducer<T.IReduxStateLocalStorage, ILocalStorageAction>;
-type ErrorStorageReducer = Reducer<T.ReduxStateError, IErrorAction>;
+type ErrorReducer = Reducer<T.ReduxStateError, IErrorAction>;
+type ProgressReducer = Reducer<T.ReduxStateProgress, IProgressAction>;
 
 const defaultEntityState: T.IReduxStateEntity = {
   [T.Resource.cars]: [],
@@ -102,7 +110,7 @@ const localStorage: LocalStorageReducer = (state = defaultLocalStorageState, act
   }
 };
 
-const error: ErrorStorageReducer = (state = null, action) => {
+const error: ErrorReducer = (state = null, action) => {
   const { type, payload } = action;
 
   switch (type) {
@@ -116,5 +124,24 @@ const error: ErrorStorageReducer = (state = null, action) => {
   }
 };
 
-export default combineReducers({ entity, meta, localStorage, error });
+const progress: ProgressReducer = (state = {}, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case T.ActionTypes.LOADING_START:
+      return {
+        ...state,
+        [payload.id]: true,
+      };
+    case T.ActionTypes.LOADING_STOP:
+      const newState = { ...state };
+      delete newState[payload.id];
+
+      return newState;
+    default:
+      return state
+  }
+};
+
+export default combineReducers({ entity, meta, localStorage, error, progress });
 

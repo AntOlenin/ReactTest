@@ -5,7 +5,7 @@ export default (theme: Theme) => {
 
   return {
     root: {
-      fontFamily: 'roboto',
+      fontFamily: 'roboto, sans-serif',
       color: theme.color.primary,
     },
     content: {
