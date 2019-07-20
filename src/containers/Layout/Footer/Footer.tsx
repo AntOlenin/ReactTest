@@ -11,7 +11,7 @@ interface IProps {
 const Footer: React.FC<IProps> = ({ classes }) => {
   return (
     <div className={classes.root}>
-      <Text>© AUTO1 Group 2018</Text>
+      <Text>©Auto1 Group 2019</Text>
     </div>
   );
 };

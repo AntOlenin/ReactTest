@@ -35,7 +35,7 @@ class Filter extends React.PureComponent<IProps, IState> {
   }
 
   handleFormChange = ({ name, value }: { name: string; value: string; }) => {
-    // @ts-ignore
+    // @ts-ignore todo
     this.setState({ [name]: value })
   };
 
