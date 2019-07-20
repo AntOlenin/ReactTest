@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
 import Select from '../../components/Select';
 import Text from '../../components/Text';
-import { IReduxState, FilterParams, SortTypes, FilterKeys } from '../../types';
+import { IReduxState, FilterParams, SortTypes, FilterKeys, ProgressIds } from '../../types';
 import style from './style';
 
 const options = [
@@ -15,6 +15,7 @@ interface IProps extends ICommonProps {
   onChange: (args: FilterParams) => void;
   filter: FilterParams;
   totalCarsCount: number;
+  inProgress: boolean;
 }
 
 class SortBar extends React.PureComponent<IProps> {
@@ -25,15 +26,16 @@ class SortBar extends React.PureComponent<IProps> {
   };
 
   render() {
-    const { classes, filter, totalCarsCount } = this.props;
+    const { classes, filter, totalCarsCount, inProgress } = this.props;
     const showingCarsCount = totalCarsCount < 10 ? totalCarsCount : 10;
+    const showingRange = inProgress ? '...' : `${showingCarsCount} of ${totalCarsCount}`;
 
     return (
       <div className={classes.root}>
         <div className={classes.meta}>
           <Text block bold size="l">Available cars</Text>
           <Text block size="l" className={classes.metaResults}>
-            Showing {showingCarsCount} of {totalCarsCount} results
+            Showing {showingRange} results
           </Text>
         </div>
 
@@ -50,8 +52,9 @@ class SortBar extends React.PureComponent<IProps> {
 }
 
 const mapStateToProps = (state: IReduxState) => {
-  const { entity: { colors, manufacturers }, meta: { totalCarsCount } } = state;
-  return { colors, manufacturers, totalCarsCount };
+  const { entity: { colors, manufacturers }, meta: { totalCarsCount }, progress } = state;
+  const inProgress = progress[ProgressIds.carsList];
+  return { colors, manufacturers, totalCarsCount, inProgress };
 };
 
 export default connect(mapStateToProps)(injectSheet(style)(SortBar));
