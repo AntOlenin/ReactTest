@@ -46,6 +46,7 @@ const theme = {
   },
   zIndexes: {
     overlay: 100,
+    header: 200,
   }
 };
 

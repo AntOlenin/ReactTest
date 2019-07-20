@@ -42,7 +42,7 @@ export default (theme: Theme) => {
       right: 0,
       width: '100%',
       height: '100%',
-      zIndex: 10,
+      zIndex: theme.zIndexes.overlay,
       opacity: 0,
       cursor: 'pointer',
     }
