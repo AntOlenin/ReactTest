@@ -12,10 +12,6 @@ interface IProps extends ICommonProps {
 }
 
 class Layout extends React.PureComponent<IProps> {
-  componentDidMount() {
-    debugger
-  }
-
   render() {
     const { classes, children } = this.props;
     const contentClassName = classnames(classes.content, this.props.contentClassName);

@@ -2,9 +2,12 @@ import React from 'react';
 import classnames from 'classnames';
 import injectSheet from 'react-jss';
 import Text from '../../components/Text';
-import Option from './Option';
-import { IOption } from './Option/Option';
 import style from './style';
+
+export interface IOption {
+  value: string;
+  text: string;
+}
 
 interface IProps extends ICommonProps {
   name: string;
@@ -23,78 +26,43 @@ class Select extends React.PureComponent<IProps, IState> {
     expanded: false,
   };
 
-  handleClick = () => {
-    this.setState({
-      expanded: !this.state.expanded,
-    });
+  handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    this.props.onChange({ name, value });
   };
 
-  handleOptionClick = (value: string) => {
-    const { name, onChange } = this.props;
-    onChange({ name, value });
-    this.setState({ expanded: false });
-  };
-
-  renderLabel() {
-    const { label } = this.props;
+  renderNativeSelect() {
+    const { classes, options, name } = this.props;
 
     return (
-      <label>
-        <Text size="s">{label}</Text>
-      </label>
+      <select name={name} className={classes.nativeSelect} onChange={this.handleChange}>
+        {options.map(({ value, text }) => {
+          return <option value={value}>{text}</option>
+        })}
+      </select>
     )
   }
 
-  renderSelect() {
-    const { classes, options, value } = this.props;
-    const { expanded } = this.state;
-    const currentOption = options.find(option => option.value === value);
-
-    const selectClassName = classnames(classes.select, {
-      [classes.expanded]: expanded,
-      [classes.collapsed]: !expanded,
-    });
-
-    return (
-      <div className={selectClassName} onClick={this.handleClick}>
-        {currentOption.text}
-      </div>
-    );
-  }
-
-  renderOptions() {
-    const { classes, options } = this.props;
-    const { expanded } = this.state;
-
-    if (!expanded) {
-      return null;
-    }
-
-    return (
-      <div className={classes.options}>
-        {options.map((option) => {
-          return <Option key={option.value} option={option} onClick={this.handleOptionClick} />
-        })}
-      </div>
-    );
-  }
-
   render() {
-    const { classes, className, options } = this.props;
+    const { classes, className, options, label, value } = this.props;
 
     if (!options.length) {
       return null;
     }
 
     const rootClassName = classnames(classes.root, className && className);
+    const currentOption = options.find(option => option.value === value);
 
     return (
       <div className={rootClassName}>
-        {this.renderLabel()}
+        <label>
+          <Text size="s">{label}</Text>
+        </label>
 
-        <div className={classes.selectWrapper}>
-          {this.renderSelect()}
-          {this.renderOptions()}
+        <div className={classes.select}>
+          {currentOption.text}
+
+          {this.renderNativeSelect()}
         </div>
       </div>
     )

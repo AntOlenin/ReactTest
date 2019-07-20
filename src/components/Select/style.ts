@@ -15,52 +15,36 @@ export default (theme: Theme) => {
     root: {
 
     },
-    selectWrapper: {
+    select: {
       width: theme.ui.select.width,
       height: theme.ui.select.height,
       position: 'relative',
-    },
-    select: {
-      width: '100%',
-      height: '100%',
       marginTop: theme.layout.spacing.s,
       borderRadius: theme.ui.select.borderRadius,
       border: `1px solid ${theme.color.border}`,
       background: theme.color.background,
-      cursor: 'pointer',
       padding: `0 ${theme.layout.spacing.m}px`,
       boxSizing: 'border-box',
       display: 'flex',
       alignItems: 'center',
 
-      '&$collapsed': {
-        '&::after': {
-          ...selectHandler,
-          borderWidth: '7px 6px 0 6px',
-          borderColor: `${theme.color.placeholder} transparent transparent transparent`,
-        },
+      '&::after': {
+        ...selectHandler,
+        borderWidth: '7px 6px 0 6px',
+        borderColor: `${theme.color.placeholder} transparent transparent transparent`,
       },
-
-      '&$expanded': {
-        '&::after': {
-          ...selectHandler,
-          borderWidth: '0 6px 7px 6px',
-          borderColor: `transparent transparent ${theme.color.placeholder} transparent`,
-        },
-      }
     },
-    options: {
-      width: '100%',
+    nativeSelect: {
       position: 'absolute',
-      top: theme.ui.select.height + theme.layout.spacing.s,
+      top: 0,
+      bottom: 0,
       left: 0,
-      borderRadius: theme.ui.select.borderRadius,
-      border: `1px solid ${theme.color.border}`,
-      boxSizing: 'border-box',
-      zIndex: theme.zIndexes.overlay,
-    },
-
-    collapsed: {},
-    expanded: {},
+      right: 0,
+      width: '100%',
+      height: '100%',
+      zIndex: 10,
+      opacity: 0,
+      cursor: 'pointer',
+    }
   }
 }
