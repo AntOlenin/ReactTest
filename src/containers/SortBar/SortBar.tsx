@@ -42,8 +42,9 @@ class SortBar extends React.PureComponent<IProps> {
         <Select
           name="sort"
           label="Sort by"
-          value={filter.sort || SortTypes.asc}
+          value={filter.sort || ''}
           options={options}
+          emptyOptionText="None"
           onChange={this.handleChange}
         />
       </div>

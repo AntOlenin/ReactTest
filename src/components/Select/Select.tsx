@@ -13,6 +13,7 @@ interface IProps extends ICommonProps {
   name: string;
   label: string;
   value: string;
+  emptyOptionText: string;
   options: Array<IOption>;
   onChange: (args: { name: string; value: string; }) => void;
 }
@@ -31,27 +32,20 @@ class Select extends React.PureComponent<IProps, IState> {
     this.props.onChange({ name, value });
   };
 
-  renderNativeSelect() {
-    const { classes, options, name } = this.props;
-
-    return (
-      <select name={name} className={classes.nativeSelect} onChange={this.handleChange}>
-        {options.map(({ value, text }) => {
-          return <option value={value}>{text}</option>
-        })}
-      </select>
-    )
-  }
-
   render() {
-    const { classes, className, options, label, value } = this.props;
+    const { classes, className, options, name, label, value: selectValue, emptyOptionText } = this.props;
 
     if (!options.length) {
       return null;
     }
 
+    const optionsWithEmpty = [
+      { text: emptyOptionText, value: '' },
+      ...options,
+    ];
+
     const rootClassName = classnames(classes.root, className && className);
-    const currentOption = options.find(option => option.value === value);
+    const currentOption = optionsWithEmpty.find(option => option.value === selectValue);
 
     return (
       <div className={rootClassName}>
@@ -62,7 +56,16 @@ class Select extends React.PureComponent<IProps, IState> {
         <div className={classes.select}>
           {currentOption.text}
 
-          {this.renderNativeSelect()}
+          <select
+            name={name}
+            value={selectValue}
+            className={classes.nativeSelect}
+            onChange={this.handleChange}
+          >
+            {optionsWithEmpty.map(({ value, text }) => {
+              return <option key={value} value={value}>{text}</option>
+            })}
+          </select>
         </div>
       </div>
     )

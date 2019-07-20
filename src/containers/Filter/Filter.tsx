@@ -24,8 +24,8 @@ interface IState {
 
 class Filter extends React.PureComponent<IProps, IState> {
   state: IState = {
-    color: this.props.filter.color || 'red',
-    manufacturer: this.props.filter.manufacturer || 'Audi',
+    color: this.props.filter.color || '',
+    manufacturer: this.props.filter.manufacturer || '',
   };
 
   async componentDidMount() {
@@ -65,6 +65,7 @@ class Filter extends React.PureComponent<IProps, IState> {
             name="color"
             value={color}
             options={colorOptions}
+            emptyOptionText="All car colors"
             onChange={this.handleFormChange}
           />
           <Select
@@ -73,6 +74,7 @@ class Filter extends React.PureComponent<IProps, IState> {
             value={manufacturer}
             className={classes.manufacturer}
             options={manufacturerOptions}
+            emptyOptionText="All manufacturers"
             onChange={this.handleFormChange}
           />
 

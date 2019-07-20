@@ -88,6 +88,6 @@ export enum SortTypes {
 export interface FilterParams {
   [FilterKeys.page]?: number | string;
   [FilterKeys.sort]?: SortTypes;
-  manufacturer?: string;
-  color?: string;
+  [FilterKeys.manufacturer]?: string;
+  [FilterKeys.color]?: string;
 }
