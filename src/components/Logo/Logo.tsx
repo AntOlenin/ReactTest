@@ -8,7 +8,7 @@ class Logo extends React.PureComponent<ICommonProps> {
     const { classes } = this.props;
 
     return (
-      <Link to="/">
+      <Link to="/" data-test-id="logo">
         <div className={classes.root} style={{ backgroundImage: `url(/images/logo.png)`}} />
       </Link>
     )
