@@ -5,7 +5,7 @@ import { Classes } from '../../theme';
 import Select from '../../components/Select';
 import Button from '../../components/Button';
 import style from './style';
-import { IManufacturer, IReduxState, FilterParams, Resource } from '../../types';
+import { IManufacturer, IReduxState, FilterParams, Resource, FilterKeys } from '../../types';
 import actions from '../../actions';
 
 interface IProps {
@@ -17,10 +17,7 @@ interface IProps {
   filter: FilterParams;
 }
 
-interface IState {
-  color: string;
-  manufacturer: string;
-}
+interface IState extends FilterParams {}
 
 class Filter extends React.PureComponent<IProps, IState> {
   state: IState = {
@@ -34,9 +31,9 @@ class Filter extends React.PureComponent<IProps, IState> {
     dispatch(actions.loadEntityList({ resource: Resource.manufacturers }));
   }
 
-  handleFormChange = ({ name, value }: { name: string; value: string; }) => {
-    // @ts-ignore todo
-    this.setState({ [name]: value })
+  handleFormChange = (params: { name: string; value: string; }) => {
+    const name = params.name as FilterKeys;
+    this.setState({ [name]: params.value })
   };
 
   handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -62,7 +59,7 @@ class Filter extends React.PureComponent<IProps, IState> {
         <form onSubmit={this.handleSubmit}>
           <Select
             label="Color"
-            name="color"
+            name={FilterKeys.color}
             value={color}
             options={colorOptions}
             emptyOptionText="All car colors"
@@ -70,7 +67,7 @@ class Filter extends React.PureComponent<IProps, IState> {
           />
           <Select
             label="Manufacturer"
-            name="manufacturer"
+            name={FilterKeys.manufacturer}
             value={manufacturer}
             className={classes.manufacturer}
             options={manufacturerOptions}
