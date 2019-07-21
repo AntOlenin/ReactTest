@@ -12,7 +12,7 @@ import style from './style';
 interface IProps {
   classes: Classes;
   filter: FilterParams;
-  dispatch: any;
+  dispatch: Dispatch;
   cars?: Array<ICar>;
   favoriteCarsIds?: Array<number | string>;
   inProgress?: boolean;

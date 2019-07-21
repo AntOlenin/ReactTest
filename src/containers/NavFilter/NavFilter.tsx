@@ -10,7 +10,7 @@ import style from './style';
 
 interface IProps {
   classes: Classes;
-  dispatch: any;
+  dispatch: Dispatch;
   colors?: Array<string>;
   manufacturers?: Array<IManufacturer>;
   onChange: (args: { color?: string; manufacturer?: string; }) => void;

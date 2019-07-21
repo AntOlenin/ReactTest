@@ -11,7 +11,7 @@ import style from './style';
 
 interface IProps extends ICommonProps, RouteComponentProps<{ id: string }> {
   car: ICar;
-  dispatch: any;
+  dispatch: Dispatch;
   id: string;
   isFavorite: boolean;
 }
