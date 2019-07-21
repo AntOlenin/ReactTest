@@ -39,7 +39,6 @@ describe('<Pagination />', () => {
       expect(el).not.toBeNull();
     });
 
-
     test('should render "Previous" page link', async () => {
       const el = await renderResult.queryByTestId('paginationPrevious');
       expect(el).not.toBeNull();
@@ -58,6 +57,96 @@ describe('<Pagination />', () => {
     test('should render "Last" page link', async () => {
       const el = await renderResult.queryByTestId('paginationLast');
       expect(el).not.toBeNull();
+    });
+
+    test('should disable "First" page link', async () => {
+      const el = await renderResult.queryByTestId('paginationFirst');
+      expect(el.tagName).toBe('SPAN');
+    });
+
+    test('should disable "Previous" page link', async () => {
+      const el = await renderResult.queryByTestId('paginationPrevious');
+      expect(el.tagName).toBe('SPAN');
+    });
+
+    test('should enable "Next" page link', async () => {
+      const el = await renderResult.queryByTestId('paginationNext');
+      expect(el.tagName).toBe('A');
+    });
+
+    test('should enable "Last" page link', async () => {
+      const el = await renderResult.queryByTestId('paginationLast');
+      expect(el.tagName).toBe('A');
+    });
+  });
+
+  describe('on not last page and not first page', () => {
+    let renderResult: RenderResult;
+
+    beforeEach(() => {
+      cleanup();
+      renderResult = renderWithRedux(
+        <ThemeProvider theme={theme}>
+          <Router>
+            <Pagination filter={{ page: '2' }} />
+          </Router>
+        </ThemeProvider>,
+      );
+    });
+
+    test('should enable "First" page link', async () => {
+      const el = await renderResult.queryByTestId('paginationFirst');
+      expect(el.tagName).toBe('A');
+    });
+
+    test('should enable "Previous" page link', async () => {
+      const el = await renderResult.queryByTestId('paginationPrevious');
+      expect(el.tagName).toBe('A');
+    });
+
+    test('should enable "Next" page link', async () => {
+      const el = await renderResult.queryByTestId('paginationNext');
+      expect(el.tagName).toBe('A');
+    });
+
+    test('should enable "Last" page link', async () => {
+      const el = await renderResult.queryByTestId('paginationLast');
+      expect(el.tagName).toBe('A');
+    });
+  });
+
+  describe('on last page', () => {
+    let renderResult: RenderResult;
+
+    beforeEach(() => {
+      cleanup();
+      renderResult = renderWithRedux(
+        <ThemeProvider theme={theme}>
+          <Router>
+            <Pagination filter={{ page: '23' }} />
+          </Router>
+        </ThemeProvider>,
+      );
+    });
+
+    test('should enable "First" page link', async () => {
+      const el = await renderResult.queryByTestId('paginationFirst');
+      expect(el.tagName).toBe('A');
+    });
+
+    test('should enable "Previous" page link', async () => {
+      const el = await renderResult.queryByTestId('paginationPrevious');
+      expect(el.tagName).toBe('A');
+    });
+
+    test('should disable "Next" page link', async () => {
+      const el = await renderResult.queryByTestId('paginationNext');
+      expect(el.tagName).toBe('SPAN');
+    });
+
+    test('should disable "Last" page link', async () => {
+      const el = await renderResult.queryByTestId('paginationLast');
+      expect(el.tagName).toBe('SPAN');
     });
   });
 });
