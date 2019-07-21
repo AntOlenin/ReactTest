@@ -15,7 +15,6 @@ interface IProps {
 }
 
 class Pagination extends React.PureComponent<IProps> {
-
   getHrefWithUpdatedPage(page: number) {
     const { filter } = this.props;
     const updatedFilter = { ...filter, page };
@@ -33,11 +32,11 @@ class Pagination extends React.PureComponent<IProps> {
 
     return (
       <div className={classes.root}>
-        <Link disabled={!hasPrev} className={classes.item} to={this.getHrefWithUpdatedPage(1)} textProps={{ size: 's' }}>First</Link>
-        <Link disabled={!hasPrev} className={classes.item} to={this.getHrefWithUpdatedPage(prevPage)} textProps={{ size: 's' }}>Previous</Link>
-        <Text size="s" className={classes.item}>Page {currentPage} of {totalPageCount}</Text>
-        <Link disabled={!hasNext} className={classes.item} to={this.getHrefWithUpdatedPage(nextPage)} textProps={{ size: 's' }}>Next</Link>
-        <Link disabled={!hasNext} className={classes.item} to={this.getHrefWithUpdatedPage(totalPageCount)} textProps={{ size: 's' }}>Last</Link>
+        <Link testId="paginationFirst" disabled={!hasPrev} className={classes.item} to={this.getHrefWithUpdatedPage(1)} textProps={{ size: 's' }}>First</Link>
+        <Link testId="paginationPrevious" disabled={!hasPrev} className={classes.item} to={this.getHrefWithUpdatedPage(prevPage)} textProps={{ size: 's' }}>Previous</Link>
+        <Text testId="paginationMiddle" size="s" className={classes.item}>Page {currentPage} of {totalPageCount}</Text>
+        <Link testId="paginationNext" disabled={!hasNext} className={classes.item} to={this.getHrefWithUpdatedPage(nextPage)} textProps={{ size: 's' }}>Next</Link>
+        <Link testId="paginationLast" disabled={!hasNext} className={classes.item} to={this.getHrefWithUpdatedPage(totalPageCount)} textProps={{ size: 's' }}>Last</Link>
       </div>
     )
   }

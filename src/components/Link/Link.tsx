@@ -23,7 +23,7 @@ class Link extends React.PureComponent<IProps> {
     const { classes, testId, color, textProps = {}, disabled, className, children, ...props } = this.props;
 
     if (disabled) {
-      return <Text {...textProps} className={className}>{children}</Text>
+      return <Text {...textProps} testId={testId} className={className}>{children}</Text>
     }
 
     const rootClassName = classnames(classes.root, className && className, {
