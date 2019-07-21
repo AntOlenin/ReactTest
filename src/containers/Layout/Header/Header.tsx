@@ -19,7 +19,7 @@ class Header extends React.PureComponent<IProps> {
 
         <div className={classes.menu}>
           <Link color="primary" to="#" className={classes.menuItem}>Purchase</Link>
-          <Link color="primary" to="/favorites" className={classes.menuItem}>My&nbsp;Orders</Link>
+          <Link color="primary" to="/favorites" testId="myOrdersLink" className={classes.menuItem}>My&nbsp;Orders</Link>
           <Link color="primary" to="#" className={classes.menuItem}>Sell</Link>
         </div>
       </div>

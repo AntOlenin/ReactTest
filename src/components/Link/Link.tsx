@@ -20,7 +20,7 @@ class Link extends React.PureComponent<IProps> {
   };
 
   render() {
-    const { classes, color, textProps = {}, disabled, className, children, ...props } = this.props;
+    const { classes, testId, color, textProps = {}, disabled, className, children, ...props } = this.props;
 
     if (disabled) {
       return <Text {...textProps} className={className}>{children}</Text>
@@ -32,7 +32,7 @@ class Link extends React.PureComponent<IProps> {
     });
 
     return (
-      <RouterLink className={rootClassName} {...props}>
+      <RouterLink data-testid={testId} className={rootClassName} {...props}>
         <Text {...textProps}>{children}</Text>
       </RouterLink>
     )

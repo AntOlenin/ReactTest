@@ -9,14 +9,14 @@ export interface IProps extends ICommonProps {
   block?: boolean;
 }
 
-const Text: React.FC<IProps> = ({ children, className, classes, size = 'm', bold = false, block }) => {
+const Text: React.FC<IProps> = ({ children, testId, className, classes, size = 'm', bold = false, block }) => {
   const rootClassName = classnames(classes.root, className && className, classes[`size-${size}`], {
     [classes.bold]: bold,
     [classes.block]: block,
   });
 
   return (
-    <span className={rootClassName}>
+    <span className={rootClassName} data-testid={testId}>
       {children}
     </span>
   );
