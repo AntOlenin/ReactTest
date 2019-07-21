@@ -1,8 +1,7 @@
 import { cars } from '../mocks/cars';
 import { ICar } from '../../types';
+import { ITEMS_PER_PAGE } from '../../constants';
 import { MockRequest, MockResponse } from 'xhr-mock';
-
-const ITEMS_PER_PAGE = 10;
 
 function paginate(collection: Array<ICar> = [], page = 1) {
   const start = (page - 1) * ITEMS_PER_PAGE;

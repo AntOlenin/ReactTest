@@ -4,7 +4,8 @@ import injectSheet from 'react-jss';
 import CarItem from '../../components/CarItem';
 import CarItemPlaceholder from '../../components/CarItemPlaceholder';
 import { Classes } from '../../theme';
-import { ICar, IReduxState, FilterParams, Resource, ProgressIds } from '../../types';
+import { ICar, IReduxState, FilterParams, Resource, ProgressIds, LocalStorageKeys } from '../../types';
+import { ITEMS_PER_PAGE } from '../../constants';
 import actions from '../../actions';
 import style from './style';
 
@@ -13,8 +14,17 @@ interface IProps {
   filter: FilterParams;
   dispatch: any;
   cars?: Array<ICar>;
+  favoriteCarsIds?: Array<number | string>;
   inProgress?: boolean;
 }
+
+const getRange = () => {
+  const result = [];
+  for (let i = 0; i < ITEMS_PER_PAGE; i++) {
+    result.push(i);
+  }
+  return result;
+};
 
 class CarList extends React.PureComponent<IProps> {
   componentDidMount() {
@@ -32,10 +42,11 @@ class CarList extends React.PureComponent<IProps> {
   }
 
   renderContent() {
-    const { classes, cars, inProgress } = this.props;
+    const { classes, cars, inProgress, favoriteCarsIds } = this.props;
+    const range = getRange();
 
     if (inProgress) {
-      return [1,2,3,4,5,6,7,8,9,10].map((item) => {
+      return range.map((item) => {
         return (
           <div key={item} className={classes.item}>
             <CarItemPlaceholder />
@@ -44,7 +55,11 @@ class CarList extends React.PureComponent<IProps> {
       })
     }
 
-    return cars.map(car => {
+    const favoriteCars = cars.filter(car => favoriteCarsIds.includes(car.stockNumber));
+    const withoutFavoriteCars = cars.filter(car => !favoriteCarsIds.includes(car.stockNumber));
+    const orderedCars = [...favoriteCars, ...withoutFavoriteCars];
+
+    return orderedCars.map(car => {
       return (
         <div key={car.stockNumber} className={classes.item}>
           <CarItem car={car} />
@@ -65,9 +80,10 @@ class CarList extends React.PureComponent<IProps> {
 }
 
 const mapStateToProps = (state: IReduxState) => {
-  const { entity: { cars }, progress } = state;
+  const { entity: { cars }, progress, localStorage } = state;
+  const favoriteCarsIds = localStorage[LocalStorageKeys.favoriteCars];
   const inProgress = progress[ProgressIds.carsList];
-  return { cars, inProgress };
+  return { cars, inProgress, favoriteCarsIds };
 };
 
 export default connect(mapStateToProps)(injectSheet(style)(CarList));
