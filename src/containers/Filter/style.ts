@@ -6,6 +6,8 @@ export default (theme: Theme) => ({
     width: theme.layout.spacing.l * 2 + theme.ui.select.width,
     padding: theme.layout.spacing.l,
     boxSizing: 'border-box',
+    position: 'sticky',
+    top: theme.layout.headerHeight + theme.layout.spacing.l,
   },
   manufacturer: {
     marginTop: theme.layout.spacing.s,

@@ -4,9 +4,9 @@ import injectSheet from 'react-jss';
 import { Classes } from '../../theme';
 import Select from '../../components/Select';
 import Button from '../../components/Button';
-import style from './style';
 import { IManufacturer, IReduxState, FilterParams, Resource, FilterKeys } from '../../types';
 import actions from '../../actions';
+import style from './style';
 
 interface IProps {
   classes: Classes;
