@@ -16,13 +16,13 @@ class CarItem extends React.PureComponent<IProps> {
   renderTitle() {
     const { classes, car } = this.props;
     const title = getCarTitle(car);
-    return <Text block bold size="l" className={classes.text}>{title}</Text>;
+    return <Text block bold size="l" className={classes.text} testId="carItemTitle">{title}</Text>;
   }
 
   renderInfo() {
     const { classes, car } = this.props;
     const info = getCarInfo(car);
-    return <Text block size="s" className={classes.text}>{info}</Text>;
+    return <Text block size="s" className={classes.text} testId="carItemInfo">{info}</Text>;
   }
 
   render() {
@@ -35,7 +35,7 @@ class CarItem extends React.PureComponent<IProps> {
         <div className={classes.content}>
           {this.renderTitle()}
           {this.renderInfo()}
-          <Link to={`/cars/${stockNumber}`} textProps={{ size: 's' }}>View details</Link>
+          <Link to={`/cars/${stockNumber}`} textProps={{ size: 's' }} testId="carItemLink">View details</Link>
         </div>
       </div>
     )
