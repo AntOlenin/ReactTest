@@ -30,17 +30,27 @@ describe('<NavFilter />', () => {
     );
   });
 
-  test('should render colors select', async () => {
+  test('should render "Color" <Label />', async () => {
+    const colorSelectLabel = await renderResult.queryByTestId('colorSelectLabel');
+    expect(colorSelectLabel).not.toBeNull();
+  });
+
+  test('should render colors <Select />', async () => {
     const colorSelect = await renderResult.queryByTestId('colorSelect');
     expect(colorSelect).not.toBeNull();
   });
 
-  test('should render manufacturer select', async () => {
+  test('should render "Manufacturer" <Label />', async () => {
+    const manufacturerSelectLabel = await renderResult.queryByTestId('manufacturerSelectLabel');
+    expect(manufacturerSelectLabel).not.toBeNull();
+  });
+
+  test('should render manufacturers <Select />', async () => {
     const manufacturerSelect = await renderResult.queryByTestId('manufacturerSelect');
     expect(manufacturerSelect).not.toBeNull();
   });
 
-  test('should render filter button', async () => {
+  test('should render "Filter" <Button />', async () => {
     const filterButton = await renderResult.queryByTestId('filterButton');
     expect(filterButton).not.toBeNull();
   });

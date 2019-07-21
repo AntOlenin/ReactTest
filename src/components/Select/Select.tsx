@@ -49,7 +49,7 @@ class Select extends React.PureComponent<IProps, IState> {
 
     return (
       <div className={rootClassName} data-testid={testId}>
-        <label>
+        <label data-testid={testId ? `${testId}Label` : ''}>
           <Text size="s">{label}</Text>
         </label>
 
