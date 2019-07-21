@@ -3,7 +3,7 @@ import qs from 'qs';
 import injectSheet from 'react-jss';
 import { RouteComponentProps } from 'react-router-dom';
 import Layout from '../../containers/Layout';
-import Filter from '../../containers/Filter';
+import NavFilter from '../../containers/NavFilter';
 import CarList from '../../containers/CarList';
 import Pagination from '../../containers/Pagination';
 import SortBar from '../../containers/SortBar';
@@ -30,7 +30,7 @@ class CarListPage extends React.Component<IProps> {
     return (
       <Layout contentClassName={classes.root}>
         <div className={classes.filterHolder}>
-          <Filter filter={filter} onChange={this.handleQueryChange}/>
+          <NavFilter filter={filter} onChange={this.handleQueryChange}/>
         </div>
 
         <div className={classes.listHolder}>

@@ -19,7 +19,7 @@ interface IProps {
 
 interface IState extends FilterParams {}
 
-class Filter extends React.PureComponent<IProps, IState> {
+class NavFilter extends React.PureComponent<IProps, IState> {
   state: IState = {
     color: this.props.filter.color || '',
     manufacturer: this.props.filter.manufacturer || '',
@@ -55,7 +55,7 @@ class Filter extends React.PureComponent<IProps, IState> {
     }
 
     return (
-      <div className={classes.root}>
+      <div className={classes.root} data-testid="navFilter">
         <form onSubmit={this.handleSubmit}>
           <Select
             label="Color"
@@ -91,4 +91,4 @@ const mapStateToProps = (state: IReduxState) => {
   return { colors, manufacturers };
 };
 
-export default connect(mapStateToProps)(injectSheet(style)(Filter));
+export default connect(mapStateToProps)(injectSheet(style)(NavFilter));

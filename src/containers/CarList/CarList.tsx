@@ -72,7 +72,7 @@ class CarList extends React.PureComponent<IProps> {
     const { classes } = this.props;
 
     return (
-      <div className={classes.root}>
+      <div className={classes.root} data-testid="carList">
         {this.renderContent()}
       </div>
     )
