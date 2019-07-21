@@ -34,7 +34,7 @@ class SortBar extends React.PureComponent<IProps> {
       <div className={classes.root}>
         <div className={classes.meta}>
           <Text block bold size="l">Available cars</Text>
-          <Text block size="l" className={classes.metaResults}>
+          <Text block size="l" className={classes.metaResults} testId="resultsRange">
             Showing {showingRange} results
           </Text>
         </div>
@@ -46,6 +46,7 @@ class SortBar extends React.PureComponent<IProps> {
           options={options}
           emptyOptionText="None"
           onChange={this.handleChange}
+          testId="sortBySelect"
         />
       </div>
     )
