@@ -14,7 +14,7 @@ class Header extends React.PureComponent<IProps> {
     const { classes } = this.props;
 
     return (
-      <div className={classes.root}>
+      <div className={classes.root} data-testid="header">
         <Logo />
 
         <div className={classes.menu}>

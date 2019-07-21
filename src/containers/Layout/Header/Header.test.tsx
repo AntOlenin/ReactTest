@@ -1,6 +1,6 @@
 import React from 'react'
 import '@testing-library/react/cleanup-after-each'
-import { render, RenderResult } from '@testing-library/react'
+import { cleanup, render, RenderResult } from '@testing-library/react'
 import { ThemeProvider } from 'react-jss';
 import { BrowserRouter as Router } from 'react-router-dom';
 import theme from './../../../theme';
@@ -10,6 +10,7 @@ describe('<Header />', () => {
   let renderResult: RenderResult;
 
   beforeEach(() => {
+    cleanup();
     renderResult = render(
       <ThemeProvider theme={theme}>
         <Router>

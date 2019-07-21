@@ -10,7 +10,7 @@ interface IProps {
 
 const Footer: React.FC<IProps> = ({ classes }) => {
   return (
-    <div className={classes.root}>
+    <div className={classes.root} data-testid="footer">
       <Text testId="footerText">©Auto1 Group 2019</Text>
     </div>
   );

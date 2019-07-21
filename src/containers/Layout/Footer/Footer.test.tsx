@@ -1,13 +1,14 @@
 import React from 'react';
 import { ThemeProvider } from 'react-jss';
+import { cleanup, render, RenderResult } from '@testing-library/react';
 import theme from './../../../theme';
 import Footer from './Footer';
-import { render, RenderResult } from '@testing-library/react';
 
 describe('<Footer />', () => {
   let renderResult: RenderResult;
 
   beforeEach(() => {
+    cleanup();
     renderResult = render(
       <ThemeProvider theme={theme}>
         <Footer />
