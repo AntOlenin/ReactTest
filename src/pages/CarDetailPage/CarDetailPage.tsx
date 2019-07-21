@@ -14,7 +14,6 @@ interface IProps extends ICommonProps, RouteComponentProps<{ id: string }> {
   dispatch: any;
   id: string;
   isFavorite: boolean;
-  error: number;
 }
 
 class CarDetailPage extends React.Component<IProps> {
@@ -34,9 +33,9 @@ class CarDetailPage extends React.Component<IProps> {
   };
 
   render() {
-    const { classes, car, isFavorite, error } = this.props;
+    const { classes, car, isFavorite } = this.props;
 
-    if (error) {
+    if (!car) {
       return (
         <NotFoundPage />
       )
@@ -60,11 +59,11 @@ class CarDetailPage extends React.Component<IProps> {
 }
 
 const mapStateToProps = (state: IReduxState, { match }: IProps) => {
-  const { entity, localStorage: { favoriteCars }, error } = state;
+  const { entity, localStorage: { favoriteCars } } = state;
   const { id } = match.params;
   const car = entity.cars.find(car => car.stockNumber === Number(id));
   const isFavorite = favoriteCars.includes(Number(id));
-  return { id, car, isFavorite, error };
+  return { id, car, isFavorite };
 };
 
 export default connect(mapStateToProps)(injectSheet(style)(CarDetailPage));

@@ -60,7 +60,7 @@ const loadEntity: LoadEntity = ({ resource, id }) => async (dispatch) => {
 
     dispatch({ type: ActionTypes.LOAD_ENTITY_SUCCESS, payload: { resource, data } })
   } catch (err) {
-    dispatch({ type: ActionTypes.REQUEST_ERROR, payload: { statusCode: err.response.status } })
+    dispatch({ type: ActionTypes.LOAD_ENTITY_ERROR })
   }
 };
 
@@ -74,14 +74,9 @@ const removeCarFromFavorite: RemoveCarFromFavorite = ({ id }) => {
   return { type: ActionTypes.UPDATE_LOCAL_STORAGE, payload: { key: LocalStorageKeys.favoriteCars, value } }
 };
 
-const clearError: ClearError = () => {
-  return { type: ActionTypes.CLEAR_ERROR }
-};
-
 export default {
   loadEntityList,
   loadEntity,
   addCarToFavorite,
   removeCarFromFavorite,
-  clearError,
 }

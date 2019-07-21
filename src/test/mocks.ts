@@ -29,7 +29,6 @@ export const reduxStateMock: IReduxState = {
     totalPageCount: 22,
   },
   progress: {},
-  error: null,
   localStorage: {
     favoriteCars: [ 51 ],
   }

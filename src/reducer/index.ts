@@ -30,12 +30,6 @@ interface ILocalStorageAction extends BaseAction {
   }
 }
 
-interface IErrorAction extends BaseAction {
-  payload?: {
-    statusCode: number;
-  }
-}
-
 interface IProgressAction extends BaseAction {
   payload: {
     id: ProgressIds;
@@ -46,7 +40,6 @@ type Reducer<T, A> = (state: T, action: A) => T;
 type EntityReducer = Reducer<T.IReduxStateEntity, IEntityAction>;
 type MetaReducer = Reducer<T.IReduxStateMeta, IMetaAction>;
 type LocalStorageReducer = Reducer<T.IReduxStateLocalStorage, ILocalStorageAction>;
-type ErrorReducer = Reducer<T.ReduxStateError, IErrorAction>;
 type ProgressReducer = Reducer<T.ReduxStateProgress, IProgressAction>;
 
 const defaultEntityState: T.IReduxStateEntity = {
@@ -110,20 +103,6 @@ const localStorage: LocalStorageReducer = (state = defaultLocalStorageState, act
   }
 };
 
-const error: ErrorReducer = (state = null, action) => {
-  const { type, payload } = action;
-
-  switch (type) {
-    case T.ActionTypes.REQUEST_ERROR:
-      const { statusCode } = payload;
-      return statusCode;
-    case T.ActionTypes.CLEAR_ERROR:
-      return null;
-    default:
-      return state
-  }
-};
-
 const progress: ProgressReducer = (state = {}, action) => {
   const { type, payload } = action;
 
@@ -143,5 +122,5 @@ const progress: ProgressReducer = (state = {}, action) => {
   }
 };
 
-export default combineReducers({ entity, meta, localStorage, error, progress });
+export default combineReducers({ entity, meta, localStorage, progress });
 

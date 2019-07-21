@@ -5,6 +5,6 @@ tests:
  - should render favorite cars first
  - should stick <Header /> always on top
  - should stick <FilterNav /> always on left top side
- - should redeirect to 404 if car is not found
+ - should redirect to 404 if car is not found
  - should change address bar to selected values on "Filter" press
 

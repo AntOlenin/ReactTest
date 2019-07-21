@@ -29,7 +29,6 @@ export interface IReduxStateLocalStorage {
   [LocalStorageKeys.favoriteCars]: Array<number | string>;
 }
 
-export type ReduxStateError = number;
 export interface ReduxStateProgress {
   [ProgressIds.colorsList]?: boolean;
   [ProgressIds.manufacturersList]?: boolean;
@@ -40,16 +39,14 @@ export interface IReduxState {
   entity: IReduxStateEntity,
   meta: IReduxStateMeta,
   localStorage: IReduxStateLocalStorage,
-  error: ReduxStateError,
   progress: ReduxStateProgress,
 }
 
 export enum ActionTypes {
   LOAD_ENTITY_LIST_SUCCESS,
   LOAD_ENTITY_SUCCESS,
+  LOAD_ENTITY_ERROR,
   UPDATE_LOCAL_STORAGE,
-  REQUEST_ERROR,
-  CLEAR_ERROR,
   LOADING_START,
   LOADING_STOP,
 }

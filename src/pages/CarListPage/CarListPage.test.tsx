@@ -12,7 +12,7 @@ import CarListPage from './CarListPage';
 
 const store = createStore(reducer, reduxStateMock, applyMiddleware(thunk));
 
-function renderWithRedux(ui: any) {
+function renderWithRedux(ui: React.ReactElement<any>) {
   return {
     ...render(<Provider store={store}>{ui}</Provider>),
     store,

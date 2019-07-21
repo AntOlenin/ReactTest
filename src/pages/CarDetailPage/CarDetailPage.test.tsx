@@ -2,14 +2,16 @@ import React from 'react';
 import { cleanup, render, RenderResult } from '@testing-library/react';
 import { ThemeProvider } from 'react-jss';
 import { Provider } from 'react-redux';
-import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { applyMiddleware, createStore } from 'redux';
 import theme from '../../theme';
 import reducer from '../../reducer';
 import { reduxStateMock } from '../../test/mocks';
-import SortBar from './SortBar';
+import CarDetailPage from './CarDetailPage';
 
-const store = createStore(reducer, reduxStateMock, applyMiddleware(thunk));
+const initialState = { ...reduxStateMock, error: 404 };
+const store = createStore(reducer, initialState, applyMiddleware(thunk));
 
 function renderWithRedux(ui: React.ReactElement<any>) {
   return {
@@ -18,26 +20,23 @@ function renderWithRedux(ui: React.ReactElement<any>) {
   }
 }
 
-describe('<SortBar />', () => {
+describe('<CarListPage />', () => {
   let renderResult: RenderResult;
 
   beforeEach(() => {
     cleanup();
     renderResult = renderWithRedux(
       <ThemeProvider theme={theme}>
-        <SortBar filter={{ }} onChange={() => {}} />
+        <Router>
+          <Route component={CarDetailPage} />
+        </Router>
       </ThemeProvider>,
     );
   });
 
-  test('should render "10 of 222 results"', async () => {
-    const textNode = await renderResult.queryByTestId('resultsRange');
-    expect(textNode.textContent).toBe('Showing 10 of 222 results');
-  });
-
-  test('should render sortBy select', async () => {
-    const select = await renderResult.queryByTestId('sortBySelect');
-    expect(select).not.toBeNull();
+  test('should render 404 if error', async () => {
+    const welcomeText = await renderResult.queryByText('Welcome!');
+    expect(welcomeText).toBeNull();
   });
 });
 
