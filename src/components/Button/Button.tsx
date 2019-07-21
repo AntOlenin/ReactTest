@@ -9,10 +9,10 @@ interface IProps extends ICommonProps {
 
 class Button extends React.PureComponent<IProps> {
   render() {
-    const { classes, text, onClick } = this.props;
+    const { classes, testId, text, onClick } = this.props;
 
     return (
-      <button className={classes.root} onClick={onClick}>
+      <button className={classes.root} data-testid={testId} onClick={onClick}>
         {text}
       </button>
     )

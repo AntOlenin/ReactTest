@@ -64,6 +64,7 @@ class NavFilter extends React.PureComponent<IProps, IState> {
             options={colorOptions}
             emptyOptionText="All car colors"
             onChange={this.handleFormChange}
+            testId="colorSelect"
           />
           <Select
             label="Manufacturer"
@@ -73,11 +74,13 @@ class NavFilter extends React.PureComponent<IProps, IState> {
             options={manufacturerOptions}
             emptyOptionText="All manufacturers"
             onChange={this.handleFormChange}
+            testId="manufacturerSelect"
           />
 
           <div className={classes.actions}>
             <Button
               text="Filter"
+              testId="filterButton"
             />
           </div>
         </form>

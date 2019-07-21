@@ -33,7 +33,7 @@ class Select extends React.PureComponent<IProps, IState> {
   };
 
   render() {
-    const { classes, className, options, name, label, value: selectValue, emptyOptionText } = this.props;
+    const { classes, testId, className, options, name, label, value: selectValue, emptyOptionText } = this.props;
 
     if (!options.length) {
       return null;
@@ -48,7 +48,7 @@ class Select extends React.PureComponent<IProps, IState> {
     const currentOption = optionsWithEmpty.find(option => option.value === selectValue);
 
     return (
-      <div className={rootClassName}>
+      <div className={rootClassName} data-testid={testId}>
         <label>
           <Text size="s">{label}</Text>
         </label>

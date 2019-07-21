@@ -2,51 +2,15 @@ import React from 'react';
 import { cleanup, render, RenderResult } from '@testing-library/react';
 import { ThemeProvider } from 'react-jss';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import theme from '../../theme';
-
-import CarListPage from './CarListPage';
-import { applyMiddleware, createStore } from 'redux';
-import reducer from '../../reducer';
 import thunk from 'redux-thunk';
-import { IReduxState } from '../../types';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { applyMiddleware, createStore } from 'redux';
+import theme from '../../theme';
+import reducer from '../../reducer';
+import { reduxStateMock } from '../../test/mocks';
+import CarListPage from './CarListPage';
 
-const initialState: IReduxState = {
-  entity: {
-    colors: ['red'],
-    manufacturers: [{ name: 'Audi', uuid: '324dw', models: [] }],
-    cars: [
-      {
-        color: 'blue',
-        fuelType: 'Diesel',
-        manufacturerName: 'Chrysler',
-        mileage: { number: 37081, unit: 'km' },
-        modelName: 'GTS',
-        pictureUrl: '/images/car.png',
-        stockNumber: 50,
-      }, {
-        color: 'red',
-        fuelType: 'Petrol',
-        manufacturerName: 'BMW',
-        mileage: { number: 50104, unit: 'km' },
-        modelName: '4er',
-        pictureUrl: '/images/car.png',
-        stockNumber: 51,
-      }
-    ],
-  },
-  meta: {
-    totalCarsCount: 222,
-    totalPageCount: 22,
-  },
-  progress: {},
-  error: null,
-  localStorage: {
-    favoriteCars: [ 51 ],
-  }
-};
-
-const store = createStore(reducer, initialState, applyMiddleware(thunk));
+const store = createStore(reducer, reduxStateMock, applyMiddleware(thunk));
 
 function renderWithRedux(ui: any) {
   return {
