@@ -57,6 +57,14 @@ describe('<CarListPage />', () => {
     const carList = await renderResult.queryByTestId('carList');
     expect(carList).not.toBeNull();
   });
+
+  test.skip('should render favorite cars first', async () => {
+    const favoriteCarsId = 51;
+    const carItems = await renderResult.queryAllByTestId('carItem');
+    const firstCarId = Number(carItems[0].dataset.id);
+
+    expect(firstCarId).toBe(favoriteCarsId);
+  });
 });
 
 export default undefined;

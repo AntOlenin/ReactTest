@@ -30,7 +30,7 @@ class CarItem extends React.PureComponent<IProps> {
     const { pictureUrl, stockNumber } = car;
 
     return (
-      <div className={classes.root}>
+      <div className={classes.root} data-testid="carItem" data-id={car.stockNumber}>
         <div className={classes.picture} style={{ backgroundImage: `url(${pictureUrl})` }} />
         <div className={classes.content}>
           {this.renderTitle()}
