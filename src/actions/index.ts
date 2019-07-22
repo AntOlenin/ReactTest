@@ -7,10 +7,9 @@ import { addToLocalStorageList, removeFromLocalStorageList } from '../helpers/ls
 const API_PREFIX = '/api';
 
 type LoadEntityList = (args: { resource: Resource; filter?: FilterParams; }) => (dispatch: Dispatch) => Promise<void>;
-type LoadEntity = (args: { resource: Resource; id: string | number; }) => (dispatch: Dispatch) => Promise<void>;
-type AddCarToLocalStorage = (args: { id: string | number; }) => void;
-type RemoveCarFromFavorite = (args: { id: string | number; }) => void;
-type ClearError = () => void;
+type LoadEntity = (args: { resource: Resource; id: number; }) => (dispatch: Dispatch) => Promise<void>;
+type AddCarToLocalStorage = (args: { id: number; }) => void;
+type RemoveCarFromFavorite = (args: { id: number; }) => void;
 
 const metaKeysMap: Record<Resource, Array<string>> = {
   [Resource.colors]: [],

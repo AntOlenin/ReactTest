@@ -17,7 +17,7 @@ interface IEntityAction extends BaseAction {
 
 interface IMetaAction extends BaseAction {
   payload: {
-    meta: Record<string, string | number>;
+    meta: Record<string, number>;
     list?: Array<T.ICar> | Array<T.IManufacturer> | Array<string>;
     data?: T.ICar;
   }

@@ -18,7 +18,8 @@ interface IProps extends ICommonProps, RouteComponentProps<{ id: string }> {
 
 class CarDetailPage extends React.Component<IProps> {
   componentDidMount() {
-    const { dispatch, id } = this.props;
+    const { dispatch, id: stringId } = this.props;
+    const id = Number(stringId);
     dispatch(actions.loadEntity({ resource: Resource.cars, id }));
   }
 
