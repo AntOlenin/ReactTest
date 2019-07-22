@@ -8,10 +8,9 @@ import { applyMiddleware, createStore } from 'redux';
 import theme from '../../theme';
 import reducer from '../../reducer';
 import { reduxStateMock } from '../../test/mocks';
-import CarDetailPage from './CarDetailPage';
+import CarDetailPage, { IProps } from './CarDetailPage';
 
-const initialState = { ...reduxStateMock, error: 404 };
-const store = createStore(reducer, initialState, applyMiddleware(thunk));
+const store = createStore(reducer, reduxStateMock, applyMiddleware(thunk));
 
 function renderWithRedux(ui: React.ReactElement<any>) {
   return {
@@ -20,7 +19,7 @@ function renderWithRedux(ui: React.ReactElement<any>) {
   }
 }
 
-describe('<CarListPage />', () => {
+describe.only('<CarListPage />', () => {
   let renderResult: RenderResult;
 
   beforeEach(() => {
@@ -28,15 +27,15 @@ describe('<CarListPage />', () => {
     renderResult = renderWithRedux(
       <ThemeProvider theme={theme}>
         <Router>
-          <Route component={CarDetailPage} />
+          <Route component={(props: IProps) => <CarDetailPage {...{...props, match: {...props.match, params: { id: '124532' } }}}/>} />
         </Router>
       </ThemeProvider>,
     );
   });
 
-  test('should render 404 if error', async () => {
-    const welcomeText = await renderResult.queryByText('Welcome!');
-    expect(welcomeText).toBeNull();
+  test.only('should render 404 if error', async () => {
+    const notFoundText = await renderResult.queryByTestId('notFoundText');
+    expect(notFoundText).not.toBeNull();
   });
 });
 

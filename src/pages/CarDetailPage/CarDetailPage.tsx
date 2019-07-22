@@ -9,7 +9,7 @@ import { ICar, IReduxState, Resource } from '../../types';
 import actions from '../../actions';
 import style from './style';
 
-interface IProps extends ICommonProps, RouteComponentProps<{ id: string }> {
+export interface IProps extends ICommonProps, RouteComponentProps<{ id: string }> {
   car: ICar;
   dispatch: Dispatch;
   id: string;
