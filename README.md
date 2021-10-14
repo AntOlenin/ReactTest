@@ -1,4 +1,4 @@
-git clone
+ddgit clone
 
 yarn
 
